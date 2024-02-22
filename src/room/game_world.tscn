@@ -45,4 +45,8 @@ mesh = SubResource("BoxMesh_vrg8d")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 shape = SubResource("BoxShape3D_hdbse")
 
-[node name="LowPolyArcher" parent="." instance=ExtResource("2_gauuw")]
+[node name="LowPolyArcher" parent="." node_paths=PackedStringArray("look_at_target") instance=ExtResource("2_gauuw")]
+look_at_target = NodePath("../Marker3D")
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
