@@ -1,0 +1,45 @@
+[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://ce5qskk6t65j3"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_7kq2o"]
+parameter_name = "SimulationTexture"
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_82e54"]
+input_name = "uv"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_v5fgi"]
+source = 5
+
+[resource]
+code = "shader_type canvas_item;
+render_mode blend_mix;
+
+uniform sampler2D SimulationTexture;
+
+
+
+void fragment() {
+// Input:3
+	vec2 n_out3p0 = UV;
+
+
+	vec4 n_out4p0;
+// Texture2D:4
+	n_out4p0 = texture(SimulationTexture, n_out3p0);
+
+
+// Output:0
+	COLOR.rgb = vec3(n_out4p0.xyz);
+
+
+}
+"
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(660, 140)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_7kq2o")
+nodes/fragment/2/position = Vector2(-160, 240)
+nodes/fragment/3/node = SubResource("VisualShaderNodeInput_82e54")
+nodes/fragment/3/position = Vector2(-140, 60)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_v5fgi")
+nodes/fragment/4/position = Vector2(323.9, 214.9)
+nodes/fragment/connections = PackedInt32Array(3, 0, 4, 0, 2, 0, 4, 2, 4, 0, 0, 0)

@@ -9,6 +9,7 @@ extends CharacterBody3D
 
 @export_group("Node Dependencies")
 @export var animation_tree: AnimationTree
+@export var player_pcam: PhantomCamera3D
 
 var input_vector := Vector2.ZERO
 var locomotion_vector := Vector2.ZERO
@@ -22,6 +23,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	look_at(look_at_target.global_position)
+	set_pcam_rotation()
 	
 	input_vector = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
@@ -34,3 +36,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, walk_speed)
 	
 	move_and_slide()
+
+
+func set_pcam_rotation() -> void:
+	player_pcam.set_third_person_rotation(global_rotation)
