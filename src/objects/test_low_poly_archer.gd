@@ -1,6 +1,8 @@
 extends CharacterBody3D
 
 
+signal dead
+
 @export var walk_speed := 2.0
 @export var look_at_target: Node3D
 
@@ -13,6 +15,12 @@ extends CharacterBody3D
 
 var input_vector := Vector2.ZERO
 var locomotion_vector := Vector2.ZERO
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("die_test"):
+		animation_tree["parameters/playback"].travel("dying")
+		dead.emit()
 
 
 func _process(delta: float) -> void:

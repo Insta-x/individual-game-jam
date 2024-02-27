@@ -3,7 +3,7 @@ extends Node3D
 
 @export var debug_displays: Array[Control] = []
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var bounce_animation_player: AnimationPlayer = $BouncingBall/AnimationPlayer
 @onready var water_plane: MeshInstance3D = $WaterPlane
 @onready var simulation: SubViewport = $Simulation
 
@@ -11,10 +11,10 @@ var debug_showing: int = 0
 
 
 func _ready() -> void:
-	animation_player.play("bounce")
+	bounce_animation_player.play("bounce")
 	
 	# Don't know why must set in code. Godot 4 bug.
-	water_plane.mesh.surface_get_material(0).set_shader_parameter('SimulationTexture', simulation.get_texture())
+	water_plane.mesh.surface_get_material(0).set_shader_parameter('simulation_texture', simulation.get_texture())
 
 
 func _input(event: InputEvent) -> void:

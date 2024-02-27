@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dycl6bmv8boim"]
+[gd_scene load_steps=41 format=3 uid="uid://dycl6bmv8boim"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4837n"]
 [ext_resource type="Script" path="res://src/room/game_world.gd" id="1_p6t0b"]
@@ -7,12 +7,15 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3D.gd" id="3_eciol"]
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3D_resource.gd" id="4_bwwr5"]
 [ext_resource type="Shader" path="res://src/shaders/water_simulation.gdshader" id="6_i771m"]
-[ext_resource type="Shader" uid="uid://s5bajp7c2xv5" path="res://src/shaders/water_plane.tres" id="7_1uiaa"]
 [ext_resource type="Shader" uid="uid://ce5qskk6t65j3" path="res://src/shaders/water_simulation_buffer.tres" id="7_aytmv"]
+[ext_resource type="Shader" path="res://src/shaders/water_plane_2.gdshader" id="9_y31py"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kbpjf"]
-sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
-ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+sky_top_color = Color(0.211765, 0.313726, 0.552941, 1)
+sky_horizon_color = Color(0.545098, 0.686275, 0.811765, 1)
+sky_curve = 0.130583
+ground_bottom_color = Color(0.545098, 0.686275, 0.811765, 1)
+ground_horizon_color = Color(0.545098, 0.686275, 0.811765, 1)
 
 [sub_resource type="Sky" id="Sky_ssrbx"]
 sky_material = SubResource("ProceduralSkyMaterial_kbpjf")
@@ -20,8 +23,12 @@ sky_material = SubResource("ProceduralSkyMaterial_kbpjf")
 [sub_resource type="Environment" id="Environment_uskuc"]
 background_mode = 2
 sky = SubResource("Sky_ssrbx")
+ambient_light_color = Color(0.5, 0.5, 0.5, 1)
+ambient_light_sky_contribution = 0.3
+ambient_light_energy = 2.0
 tonemap_mode = 2
-glow_enabled = true
+tonemap_white = 16.0
+volumetric_fog_density = 0.0155
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0l5rh"]
 albedo_texture = ExtResource("1_w5huj")
@@ -39,6 +46,42 @@ cull_mask = 524287
 h_offset = 0.5
 v_offset = 0.0
 fov = 75.0
+
+[sub_resource type="Animation" id="Animation_smnh1"]
+resource_name = "die"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DiePhantomCamera3D:priority")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [10]
+}
+
+[sub_resource type="Animation" id="Animation_l27e5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DiePhantomCamera3D:priority")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pvsqw"]
+_data = {
+"RESET": SubResource("Animation_l27e5"),
+"die": SubResource("Animation_smnh1")
+}
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ncvvb"]
 viewport_path = NodePath("WaterCollision")
@@ -63,21 +106,68 @@ resource_local_to_scene = true
 shader = ExtResource("7_aytmv")
 shader_parameter/SimulationTexture = SubResource("ViewportTexture_nww45")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0s5tx"]
+noise_type = 3
+seed = 1
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e0aea"]
+seamless = true
+as_normal_map = true
+bump_strength = 3.0
+noise = SubResource("FastNoiseLite_0s5tx")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hkhb6"]
+noise_type = 3
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cg37w"]
+seamless = true
+as_normal_map = true
+bump_strength = 3.0
+noise = SubResource("FastNoiseLite_hkhb6")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_hp0uo"]
+viewport_path = NodePath("Simulation")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mpw8r"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r5lbm"]
+seamless = true
+noise = SubResource("FastNoiseLite_mpw8r")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_60a7t"]
 resource_local_to_scene = true
 render_priority = 0
-shader = ExtResource("7_1uiaa")
-shader_parameter/Amplitude = 0.1
-shader_parameter/ShallowWater = Color(0.133333, 0, 0, 1)
-shader_parameter/DeepWater = Color(0, 0, 0.756863, 1)
-shader_parameter/murkiness = 0.5
-shader_parameter/refraction_strength = 0.2
+shader = ExtResource("9_y31py")
+shader_parameter/albedo = Color(0, 0.270588, 0.509804, 1)
+shader_parameter/fresnel_albedo = Color(0, 0, 0, 1)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.02
+shader_parameter/wave_direction = Vector2(1, 0)
+shader_parameter/wave_direction2 = Vector2(0, 1)
+shader_parameter/wave_time_scale = 0.025
+shader_parameter/noise_scale = 10.0
+shader_parameter/height_scale = 0.05
+shader_parameter/color_deep = Color(0.105882, 0.294118, 0.329412, 1)
+shader_parameter/color_shallow = Color(0, 0.552941, 0.65098, 1)
+shader_parameter/beers_law = 2.0
+shader_parameter/depth_offset = -0.75
+shader_parameter/edge_scale = 0.2
+shader_parameter/near = 0.5
+shader_parameter/far = 100.0
+shader_parameter/edge_color = Color(1, 1, 1, 1)
+shader_parameter/amplitude = 0.2
+shader_parameter/normal_texture = SubResource("NoiseTexture2D_e0aea")
+shader_parameter/normal_texture2 = SubResource("NoiseTexture2D_cg37w")
+shader_parameter/wave = SubResource("NoiseTexture2D_r5lbm")
+shader_parameter/simulation_texture = SubResource("ViewportTexture_hp0uo")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_vbclh"]
 material = SubResource("ShaderMaterial_60a7t")
 size = Vector2(30, 30)
-subdivide_width = 500
-subdivide_depth = 500
+subdivide_width = 200
+subdivide_depth = 200
 
 [sub_resource type="Environment" id="Environment_qiful"]
 background_mode = 1
@@ -134,13 +224,14 @@ debug_displays = [null, null, null]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 2.0
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_uskuc")
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999996, 0, 0, 0, 1, 0, 0, 0, 0.999996, 0, 1.3, 1.49999)
+transform = Transform3D(0.999996, 0, 0, 0, 0.688745, 0.72499, 0, -0.724995, 0.688741, 0, 2, 1.2)
 cull_mask = 524287
 h_offset = 0.5
 
@@ -151,6 +242,7 @@ script = ExtResource("1_4837n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+visible = false
 material_override = SubResource("StandardMaterial3D_0l5rh")
 mesh = SubResource("BoxMesh_vrg8d")
 
@@ -158,15 +250,15 @@ mesh = SubResource("BoxMesh_vrg8d")
 shape = SubResource("BoxShape3D_hdbse")
 
 [node name="Marker3D" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
 
 [node name="PlayerGroup" type="Node" parent="."]
 
-[node name="PhantomCamera3D" type="Node3D" parent="PlayerGroup"]
+[node name="NormalPhantomCamera3D" type="Node3D" parent="PlayerGroup"]
 transform = Transform3D(0.999996, 0, 0, 0, 1, 0, 0, 0, 0.999996, 0, 1.3, 1.49999)
 script = ExtResource("3_eciol")
 priority_override = false
-priority = 0
+priority = 1
 follow_mode = 6
 follow_target = NodePath("../LowPolyArcher")
 follow_parameters/spring_arm/spring_length = 1.5
@@ -181,9 +273,31 @@ tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_fdunx")
 
+[node name="DiePhantomCamera3D" type="Node3D" parent="PlayerGroup"]
+transform = Transform3D(0.999996, 0, 0, 0, 0.688745, 0.72499, 0, -0.724995, 0.688741, 0, 2, 1.2)
+script = ExtResource("3_eciol")
+priority_override = false
+priority = 0
+follow_mode = 2
+follow_target = NodePath("../LowPolyArcher")
+follow_parameters/target_offset = Vector3(0, 2, 1.2)
+follow_parameters/damping = false
+look_at_mode = 2
+look_at_target = NodePath("../LowPolyArcher")
+look_at_parameters/look_at_target_offset = Vector3(0, 0, -0.7)
+tween_parameters = null
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = SubResource("Resource_fdunx")
+
 [node name="LowPolyArcher" parent="PlayerGroup" node_paths=PackedStringArray("look_at_target", "player_pcam") instance=ExtResource("2_gauuw")]
 look_at_target = NodePath("../../Marker3D")
-player_pcam = NodePath("../PhantomCamera3D")
+player_pcam = NodePath("../NormalPhantomCamera3D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerGroup"]
+libraries = {
+"": SubResource("AnimationLibrary_pvsqw")
+}
 
 [node name="Simulation" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -236,11 +350,15 @@ far = 6.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6)
 layers = 524288
 mesh = SubResource("SphereMesh_en146")
+metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="BouncingBall"]
 mesh = SubResource("SphereMesh_asypq")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BouncingBall"]
+root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_uqids")
 }
+
+[connection signal="dead" from="PlayerGroup/LowPolyArcher" to="PlayerGroup/AnimationPlayer" method="play" binds= ["die"]]

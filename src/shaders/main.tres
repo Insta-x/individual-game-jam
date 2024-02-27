@@ -126,7 +126,7 @@ void vertex() {
 
 	vec4 n_out3p0;
 // Texture2D:3
-	n_out3p0 = vec4(0.0);
+	n_out3p0 = texture(simulation, n_out2p0);
 	float n_out3p1 = n_out3p0.r;
 
 
@@ -258,7 +258,7 @@ nodes/vertex/10/node = SubResource("VisualShaderNodeVectorOp_h5i5w")
 nodes/vertex/10/position = Vector2(380, 40)
 nodes/vertex/11/node = SubResource("VisualShaderNodeParameterRef_pba11")
 nodes/vertex/11/position = Vector2(-801.754, 244.199)
-nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0, 3, 1, 5, 0, 6, 0, 5, 1, 7, 0, 8, 0, 5, 0, 8, 1, 9, 0, 10, 0, 8, 0, 10, 1, 10, 0, 0, 0)
+nodes/vertex/connections = PackedInt32Array(2, 0, 3, 0, 3, 1, 5, 0, 6, 0, 5, 1, 7, 0, 8, 0, 5, 0, 8, 1, 9, 0, 10, 0, 8, 0, 10, 1, 10, 0, 0, 0, 11, 0, 3, 2)
 nodes/fragment/0/position = Vector2(960, -40)
 nodes/fragment/6/node = SubResource("VisualShaderNodeExpression_bxgl8")
 nodes/fragment/6/position = Vector2(-440, 400)
