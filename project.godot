@@ -30,6 +30,10 @@ folder_colors={
 "res://src/": "blue"
 }
 
+[filesystem]
+
+import/fbx/enabled=false
+
 [input]
 
 move_forward={

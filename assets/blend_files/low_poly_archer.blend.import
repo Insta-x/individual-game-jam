@@ -31,8 +31,8 @@ animation/remove_immutable_tracks=true
 import_script/path=""
 _subresources={
 "nodes": {
-"PATH:Light": {
-"import/skip_import": true
+"PATH:Armature/Skeleton3D": {
+"retarget/bone_map": Resource("res://assets/bone_maps/mixamo_bipedal_bone_map.tres")
 }
 }
 }
