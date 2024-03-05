@@ -233,7 +233,7 @@ shadow_enabled = true
 environment = SubResource("Environment_uskuc")
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999991, 0, 0, 0, 0.514493, 0.857482, 0, -0.857489, 0.514489, 0, 2, 1.2)
+transform = Transform3D(0.999996, 0, 0, 0, 1, 0, 0, 0, 0.999996, 0, 1.3, 1.49999)
 cull_mask = 524287
 h_offset = 0.5
 current = true
@@ -274,7 +274,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_fdunx")
 
 [node name="DiePhantomCamera3D" type="Node3D" parent="PlayerGroup"]
-transform = Transform3D(0.999991, 0, 0, 0, 0.999995, 0, 0, 0, 0.999987, 0, 2, 1.2)
+transform = Transform3D(0.999991, 0, 0, 0, 0.514493, 0.857482, 0, -0.857489, 0.514489, 0, 2, 1.2)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 0
@@ -353,8 +353,12 @@ current = true
 size = 30.0
 far = 6.0
 
+[node name="TestAttack" parent="." instance=ExtResource("11_p1yc1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21564, 0.818985, -3.73155)
+
 [node name="BouncingBall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6)
+visible = false
 layers = 524288
 mesh = SubResource("SphereMesh_en146")
 metadata/_edit_group_ = true
@@ -367,8 +371,5 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_uqids")
 }
-
-[node name="TestAttack" parent="." instance=ExtResource("11_p1yc1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21564, 0.818985, -3.73155)
 
 [connection signal="dead" from="PlayerGroup/Player" to="PlayerGroup/AnimationPlayer" method="play" binds= ["die"]]

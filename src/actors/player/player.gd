@@ -5,7 +5,9 @@ class_name Player
 
 signal dead
 
+@export var turning_speed := 1.0
 @export var walk_speed := 2.0
+@export var attack_move_factor := 5.0
 
 @export_group("Animation Parameters")
 @export var locomotion_transition_speed := 3.0
@@ -22,6 +24,8 @@ signal dead
 var input_vector := Vector2.ZERO
 var locomotion_vector := Vector2.ZERO
 
+var attack_charge := 0
+
 
 #func _unhandled_input(event: InputEvent) -> void:
 	#if event.is_action_pressed("die_test"):
@@ -37,9 +41,9 @@ func animation_tree_travel(new_state: String) -> void:
 	animation_tree["parameters/playback"].travel(new_state)
 
 
-func root_motion_movement(delta: float) -> void:
+func root_motion_movement(delta: float, move_factor := 1.0) -> void:
 	var current_rotation := transform.basis.get_rotation_quaternion()
-	velocity = (current_rotation.normalized() * animation_tree.get_root_motion_position()) / delta * walk_speed
+	velocity = (current_rotation.normalized() * animation_tree.get_root_motion_position()) / delta * move_factor
 
 
 #region Moving State
@@ -51,10 +55,17 @@ func _on_moving_state_unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("block"):
 		state_chart.send_event("ToBlocking")
 		get_viewport().set_input_as_handled()
+	
+	if event.is_action_pressed("attack") and attack_charge >= 5:
+		state_chart.send_event("ToAttacking")
+		get_viewport().set_input_as_handled()
 
 
 func _on_moving_state_physics_processing(delta: float) -> void:
-	look_at(look_at_target.global_position)
+	var target_position := look_at_target.transform.origin
+	target_position.y = 0
+	var new_transform := transform.looking_at(target_position, Vector3.UP)
+	transform = transform.interpolate_with(new_transform, turning_speed * delta)
 	
 	input_vector = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
@@ -85,11 +96,24 @@ func _on_blocking_state_entered() -> void:
 
 func _on_blocking_hurtbox_detected(area: Area3D) -> void:
 	animation_tree_travel("block-react")
+	attack_charge = clampi(attack_charge + 1, 0, 5)
 
 
 func _on_blocking_state_exited() -> void:
 	hurtbox.area_entered.disconnect(_on_blocking_hurtbox_detected)
 	hurtbox.area_entered.connect(_on_not_blocking_hurtbox_area_entered)
+#endregion
+
+
+#region Attacking State
+func _on_attacking_state_entered() -> void:
+	animation_tree_travel("jump-attack")
+	attack_charge = 0
+
+
+func _on_attacking_state_physics_processing(delta: float) -> void:
+	root_motion_movement(delta, attack_move_factor)
+	move_and_slide()
 #endregion
 
 

@@ -25,7 +25,10 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	look_at(look_at_target.global_position)
+	var target_position := look_at_target.transform.origin
+	target_position.y = 0
+	var new_transform := transform.looking_at(target_position, Vector3.UP)
+	transform = transform.interpolate_with(new_transform, 5.0 * delta)
 	
 	#input_vector = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	#var direction := (transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
