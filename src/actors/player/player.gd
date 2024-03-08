@@ -3,6 +3,8 @@ extends CharacterBody3D
 class_name Player
 
 
+const ATTACK_CHARGE_NEEDED = 5
+
 signal dead
 
 @export var turning_speed := 1.0
@@ -16,21 +18,16 @@ signal dead
 @export var animation_tree: AnimationTree
 @export var state_chart: StateChart
 @export var hurtbox: Area3D
+@export var hitbox_collision: CollisionShape3D
 
 @export_group("External Node Dependencies")
 @export var player_pcam: PhantomCamera3D
-@export var look_at_target: Node3D
+@export var enemy: Enemy
 
 var input_vector := Vector2.ZERO
 var locomotion_vector := Vector2.ZERO
 
 var attack_charge := 0
-
-
-#func _unhandled_input(event: InputEvent) -> void:
-	#if event.is_action_pressed("die_test"):
-		#animation_tree["parameters/playback"].travel("dying")
-		#dead.emit()
 
 
 func set_pcam_rotation() -> void:
@@ -46,6 +43,19 @@ func root_motion_movement(delta: float, move_factor := 1.0) -> void:
 	velocity = (current_rotation.normalized() * animation_tree.get_root_motion_position()) / delta * move_factor
 
 
+func smooth_look_at(delta: float) -> void:
+	var target_position := enemy.transform.origin
+	target_position.y = 0
+	var new_transform := transform.looking_at(target_position, Vector3.UP)
+	transform = transform.interpolate_with(new_transform, turning_speed * delta)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("debug_attack_charge"):
+		attack_charge = ATTACK_CHARGE_NEEDED
+		get_viewport().set_input_as_handled()
+
+
 #region Moving State
 func _on_moving_state_entered() -> void:
 	animation_tree_travel("Move")
@@ -56,16 +66,13 @@ func _on_moving_state_unhandled_input(event: InputEvent) -> void:
 		state_chart.send_event("ToBlocking")
 		get_viewport().set_input_as_handled()
 	
-	if event.is_action_pressed("attack") and attack_charge >= 5:
+	if event.is_action_pressed("attack") and attack_charge >= ATTACK_CHARGE_NEEDED:
 		state_chart.send_event("ToAttacking")
 		get_viewport().set_input_as_handled()
 
 
 func _on_moving_state_physics_processing(delta: float) -> void:
-	var target_position := look_at_target.transform.origin
-	target_position.y = 0
-	var new_transform := transform.looking_at(target_position, Vector3.UP)
-	transform = transform.interpolate_with(new_transform, turning_speed * delta)
+	smooth_look_at(delta)
 	
 	input_vector = Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	var direction := (transform.basis * Vector3(input_vector.x, 0, input_vector.y)).normalized()
@@ -114,6 +121,10 @@ func _on_attacking_state_entered() -> void:
 func _on_attacking_state_physics_processing(delta: float) -> void:
 	root_motion_movement(delta, attack_move_factor)
 	move_and_slide()
+
+
+func _on_attacking_state_exited() -> void:
+	hitbox_collision.disabled = true
 #endregion
 
 

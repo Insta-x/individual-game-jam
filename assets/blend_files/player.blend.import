@@ -9028,7 +9028,7 @@ _subresources={
 }
 },
 "nodes": {
-"PATH:Armature_015/Skeleton3D": {
+"PATH:Armature/Skeleton3D": {
 "retarget/bone_map": Resource("res://assets/bone_maps/mixamo_bipedal_bone_map.tres")
 }
 }

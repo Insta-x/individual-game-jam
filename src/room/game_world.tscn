@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://dycl6bmv8boim"]
+[gd_scene load_steps=42 format=3 uid="uid://dycl6bmv8boim"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4837n"]
 [ext_resource type="Script" path="res://src/room/game_world.gd" id="1_p6t0b"]
@@ -7,10 +7,9 @@
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3D_resource.gd" id="4_bwwr5"]
 [ext_resource type="Shader" path="res://src/shaders/water_simulation.gdshader" id="6_i771m"]
 [ext_resource type="PackedScene" uid="uid://bapbgoptotddq" path="res://src/actors/player/player.tscn" id="6_m3h3g"]
+[ext_resource type="PackedScene" uid="uid://bvo40esytcysp" path="res://src/actors/enemy/enemy.tscn" id="7_2kh4i"]
 [ext_resource type="Shader" uid="uid://ce5qskk6t65j3" path="res://src/shaders/water_simulation_buffer.tres" id="7_aytmv"]
 [ext_resource type="Shader" path="res://src/shaders/water_plane_2.gdshader" id="9_y31py"]
-[ext_resource type="PackedScene" uid="uid://cr22fvdqxb4g8" path="res://src/actors/enemy/enemy.tscn" id="10_w5s1j"]
-[ext_resource type="PackedScene" uid="uid://bfs1umprdctfk" path="res://src/objects/test_attack.tscn" id="11_p1yc1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kbpjf"]
 sky_top_color = Color(0.211765, 0.313726, 0.552941, 1)
@@ -274,7 +273,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_fdunx")
 
 [node name="DiePhantomCamera3D" type="Node3D" parent="PlayerGroup"]
-transform = Transform3D(0.999991, 0, 0, 0, 0.514493, 0.857482, 0, -0.857489, 0.514489, 0, 2, 1.2)
+transform = Transform3D(0.999991, 0, 0, 0, 0.999995, 0, 0, 0, 0.999987, 0, 2, 1.2)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 0
@@ -289,9 +288,9 @@ tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_fdunx")
 
-[node name="Player" parent="PlayerGroup" node_paths=PackedStringArray("player_pcam", "look_at_target") instance=ExtResource("6_m3h3g")]
+[node name="Player" parent="PlayerGroup" node_paths=PackedStringArray("player_pcam", "enemy") instance=ExtResource("6_m3h3g")]
 player_pcam = NodePath("../NormalPhantomCamera3D")
-look_at_target = NodePath("../../Enemy")
+enemy = NodePath("../../Enemy")
 
 [node name="DieCameraGlue" type="Marker3D" parent="PlayerGroup/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 1.2)
@@ -301,9 +300,9 @@ libraries = {
 "": SubResource("AnimationLibrary_pvsqw")
 }
 
-[node name="Enemy" parent="." node_paths=PackedStringArray("look_at_target") instance=ExtResource("10_w5s1j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.21808)
-look_at_target = NodePath("../PlayerGroup/Player")
+[node name="Enemy" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_2kh4i")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -7.9684)
+player = NodePath("../PlayerGroup/Player")
 
 [node name="Simulation" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -352,9 +351,6 @@ projection = 1
 current = true
 size = 30.0
 far = 6.0
-
-[node name="TestAttack" parent="." instance=ExtResource("11_p1yc1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21564, 0.818985, -3.73155)
 
 [node name="BouncingBall" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -6)
