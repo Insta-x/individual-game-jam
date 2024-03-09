@@ -16,6 +16,7 @@ signal dead
 @export var state_chart: StateChart
 @export var hurtbox: Area3D
 @export var hitbox_collision: CollisionShape3D
+@export var parry_particles: GPUParticles3D
 @export var debug_label: Label3D
 @export_subgroup("Audio")
 @export var parry_sfx: AudioStreamPlayer3D
@@ -41,6 +42,8 @@ func character_movement() -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, walk_speed)
 		velocity.z = move_toward(velocity.z, 0, walk_speed)
+	
+	velocity.y = 0
 
 
 func root_motion_movement(delta: float, move_factor := 1.0) -> void:
@@ -155,6 +158,9 @@ func _on_attacking_hurtbox_area_entered(area: Area3D) -> void:
 func _on_attacking_state_exited() -> void:
 	hitbox_collision.set_deferred("disabled", true)
 	
+	# There are some jumping attacks that can be interrupted mid-air
+	global_position.y = 0
+	
 	hurtbox.area_entered.connect(_on_not_attacking_hurtbox_area_entered)
 	hurtbox.area_entered.disconnect(_on_attacking_hurtbox_area_entered)
 #endregion
@@ -164,15 +170,25 @@ func _on_attacking_state_exited() -> void:
 func _on_blocking_state_entered() -> void:
 	animation_tree_travel("block-react")
 	play_parry_sfx()
+	parry_particles.emitting = true
 #endregion
 
 
 #region Reacting State
 func _on_reacting_state_entered() -> void:
 	animation_tree_travel("react-from-left")
+
+
+func _on_reacting_state_physics_processing(delta: float) -> void:
+	root_motion_movement(delta)
+	move_and_slide()
 #endregion
 
 
 func _on_not_attacking_hurtbox_area_entered(area: Area3D) -> void:
 	print("ENEMY ATTACKED")
 	state_chart.send_event("ToBlocking")
+
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	state_chart.send_event("AnimationFinished")

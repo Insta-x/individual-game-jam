@@ -150,7 +150,7 @@ shader_parameter/wave_direction = Vector2(1, 0)
 shader_parameter/wave_direction2 = Vector2(0, 1)
 shader_parameter/wave_time_scale = 0.025
 shader_parameter/noise_scale = 10.0
-shader_parameter/height_scale = 0.05
+shader_parameter/height_scale = 0.1
 shader_parameter/color_deep = Color(0, 0, 0, 1)
 shader_parameter/color_shallow = Color(0, 0, 0, 1)
 shader_parameter/beers_law = 2.0
@@ -245,7 +245,6 @@ script = ExtResource("1_4837n")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-visible = false
 material_override = SubResource("StandardMaterial3D_0l5rh")
 mesh = SubResource("BoxMesh_vrg8d")
 
@@ -274,7 +273,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_fdunx")
 
 [node name="DiePhantomCamera3D" type="Node3D" parent="PlayerGroup"]
-transform = Transform3D(0.999991, 0, 0, 0, 0.999995, 0, 0, 0, 0.999987, 0, 2, 1.2)
+transform = Transform3D(0.999991, 0, 0, 0, 0.514493, 0.857482, 0, -0.857489, 0.514489, 0, 2, 1.2)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 0
@@ -337,6 +336,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="WaterPlane" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+visible = false
 mesh = SubResource("PlaneMesh_vbclh")
 
 [node name="WaterCollision" type="SubViewport" parent="."]
