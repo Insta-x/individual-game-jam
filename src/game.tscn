@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://co08cs5fktxi3"]
+
+[ext_resource type="PackedScene" uid="uid://dycl6bmv8boim" path="res://src/room/game_world.tscn" id="1_gd7tl"]
+[ext_resource type="Script" path="res://src/game.gd" id="1_lowl7"]
+[ext_resource type="PackedScene" uid="uid://dvyjm7y0yr446" path="res://src/UI/main_menu.tscn" id="2_ycm0x"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_lowl7")
+
+[node name="GameWorld" parent="." instance=ExtResource("1_gd7tl")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="CanvasLayer" instance=ExtResource("2_ycm0x")]

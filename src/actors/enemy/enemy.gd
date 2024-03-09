@@ -29,6 +29,11 @@ var move_vector := Vector2.ZERO
 var locomotion_vector := Vector2.ZERO
 
 
+func _ready() -> void:
+	GlobalSignals.fight_start.connect(on_fight_start)
+	GlobalSignals.fight_finished.connect(on_fight_finished)
+
+
 func animation_tree_travel(new_state: String) -> void:
 	animation_tree["parameters/playback"].travel(new_state)
 
@@ -183,6 +188,14 @@ func _on_reacting_state_physics_processing(delta: float) -> void:
 	root_motion_movement(delta)
 	move_and_slide()
 #endregion
+
+
+func on_fight_start() -> void:
+	state_chart.send_event("FightStarted")
+
+
+func on_fight_finished(_player_win: bool) -> void:
+	state_chart.send_event("FightFinished")
 
 
 func _on_not_attacking_hurtbox_area_entered(area: Area3D) -> void:

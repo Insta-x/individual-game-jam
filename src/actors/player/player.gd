@@ -34,6 +34,11 @@ var locomotion_vector := Vector2.ZERO
 var attack_charge := 0
 
 
+func _ready() -> void:
+	GlobalSignals.fight_start.connect(on_fight_start)
+	GlobalSignals.fight_finished.connect(on_fight_finished)
+
+
 func set_pcam_rotation() -> void:
 	player_pcam.set_third_person_rotation(global_rotation)
 
@@ -141,6 +146,7 @@ func _on_attacking_state_exited() -> void:
 
 #region Dying State
 func _on_dying_state_entered() -> void:
+	hitbox_collision.set_deferred("disabled", true)
 	animation_tree_travel("dying")
 	dead.emit()
 
@@ -153,6 +159,15 @@ func _on_dying_state_physics_processing(delta: float) -> void:
 
 func die() -> void:
 	state_chart.send_event("ToDying")
+	GlobalSignals.fight_finished.emit(false)
+
+
+func on_fight_start() -> void:
+	state_chart.send_event("FightStarted")
+
+
+func on_fight_finished(_player_win: bool) -> void:
+	state_chart.send_event("FightFinished")
 
 
 func _on_not_blocking_hurtbox_area_entered(area: Area3D) -> void:

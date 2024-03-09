@@ -11,12 +11,18 @@ config_version=5
 [application]
 
 config/name="individual-game-jam"
-run/main_scene="res://src/room/game_world.tscn"
+run/main_scene="res://src/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalSignals="*res://src/globals/global_signals.gd"
+
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/size/always_on_top=true
 
 [editor_plugins]

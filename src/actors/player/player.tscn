@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://bapbgoptotddq"]
+[gd_scene load_steps=57 format=3 uid="uid://bapbgoptotddq"]
 
 [ext_resource type="PackedScene" uid="uid://b1dv6hjdyo3kt" path="res://assets/blend_files/player.blend" id="1_5stu6"]
 [ext_resource type="Script" path="res://src/actors/player/player.gd" id="1_aspnc"]
@@ -5615,6 +5615,9 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4muql"]
 xfade_time = 0.5
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xy7np"]
+xfade_time = 0.3
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tmlpr"]
 states/End/position = Vector2(1063, 132)
 states/Move/node = SubResource("AnimationNodeBlendSpace2D_5a2o7")
@@ -5628,7 +5631,7 @@ states/dying/node = SubResource("AnimationNodeAnimation_mvhxa")
 states/dying/position = Vector2(398, 221)
 states/jump-attack/node = SubResource("AnimationNodeAnimation_438my")
 states/jump-attack/position = Vector2(566, 132)
-transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_dkhbc"), "Move", "block", SubResource("AnimationNodeStateMachineTransition_l0phv"), "block", "block-react", SubResource("AnimationNodeStateMachineTransition_ywvwp"), "block", "Move", SubResource("AnimationNodeStateMachineTransition_0q5us"), "block-react", "Move", SubResource("AnimationNodeStateMachineTransition_1hhuv"), "Move", "dying", SubResource("AnimationNodeStateMachineTransition_pattw"), "Move", "jump-attack", SubResource("AnimationNodeStateMachineTransition_p1qsi"), "jump-attack", "Move", SubResource("AnimationNodeStateMachineTransition_4muql")]
+transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_dkhbc"), "Move", "block", SubResource("AnimationNodeStateMachineTransition_l0phv"), "block", "block-react", SubResource("AnimationNodeStateMachineTransition_ywvwp"), "block", "Move", SubResource("AnimationNodeStateMachineTransition_0q5us"), "block-react", "Move", SubResource("AnimationNodeStateMachineTransition_1hhuv"), "Move", "dying", SubResource("AnimationNodeStateMachineTransition_pattw"), "Move", "jump-attack", SubResource("AnimationNodeStateMachineTransition_p1qsi"), "jump-attack", "Move", SubResource("AnimationNodeStateMachineTransition_4muql"), "dying", "Move", SubResource("AnimationNodeStateMachineTransition_xy7np")]
 graph_offset = Vector2(18, -6)
 
 [node name="Player" node_paths=PackedStringArray("animation_tree", "state_chart", "hurtbox", "hitbox_collision", "parry_particles", "parry_sfx", "hit_sfx") instance=ExtResource("1_5stu6")]
@@ -5670,40 +5673,40 @@ disabled = true
 
 [node name="GeneralSkeleton" parent="Armature" index="0"]
 bones/0/position = Vector3(-0.000459323, -5.64495e-10, 0.00473533)
-bones/1/position = Vector3(-1.74763e-10, 0.757789, -0.00199905)
-bones/1/rotation = Quaternion(-0.0433031, -0.422778, -0.0542118, 0.903573)
-bones/2/rotation = Quaternion(-0.0904582, 0.0245741, 0.0188494, 0.995419)
-bones/3/rotation = Quaternion(-0.039649, 0.0475505, 0.0350601, 0.997466)
-bones/4/rotation = Quaternion(0.0636049, 0.0510192, 0.0300155, 0.996218)
-bones/5/rotation = Quaternion(-0.00342614, 0.0877068, 0.0318599, 0.995631)
-bones/6/rotation = Quaternion(0.034499, 0.190056, 0.0337375, 0.980587)
-bones/8/rotation = Quaternion(0.435074, 0.535898, 0.580533, -0.431863)
-bones/9/rotation = Quaternion(-0.0578521, 0.990965, 0.107993, -0.0545816)
-bones/10/rotation = Quaternion(-0.109134, -0.55155, 0.142957, 0.814522)
-bones/11/rotation = Quaternion(0.106279, 0.620634, -0.156917, 0.760852)
-bones/12/rotation = Quaternion(0.158482, 0.0768331, 0.144683, 0.973677)
-bones/13/rotation = Quaternion(-0.126506, 0.753787, 0.163885, 0.623653)
+bones/1/position = Vector3(-1.74763e-10, 0.765374, -0.00199905)
+bones/1/rotation = Quaternion(-0.0499788, -0.438872, -0.0480775, 0.89587)
+bones/2/rotation = Quaternion(-0.0896148, 0.0252945, 0.0193177, 0.995468)
+bones/3/rotation = Quaternion(-0.0403738, 0.0494109, 0.0383944, 0.997223)
+bones/4/rotation = Quaternion(0.0627919, 0.0532019, 0.0329486, 0.996063)
+bones/5/rotation = Quaternion(-0.0742761, 0.0983173, 0.0112204, 0.992316)
+bones/6/rotation = Quaternion(0.05585, 0.204706, 0.0261755, 0.976878)
+bones/8/rotation = Quaternion(0.43557, 0.534654, 0.585466, -0.426208)
+bones/9/rotation = Quaternion(-0.0714338, 0.988653, 0.127687, -0.0340451)
+bones/10/rotation = Quaternion(-0.108461, -0.549198, 0.154399, 0.814112)
+bones/11/rotation = Quaternion(0.110163, 0.609838, -0.166915, 0.766877)
+bones/12/rotation = Quaternion(0.158425, 0.0768135, 0.144744, 0.973679)
+bones/13/rotation = Quaternion(-0.1265, 0.752779, 0.163627, 0.624938)
 bones/14/rotation = Quaternion(-0.021852, -0.0993469, -0.139509, 0.984982)
 bones/15/rotation = Quaternion(0, -2.98023e-08, 2.98023e-08, 1)
-bones/16/rotation = Quaternion(0.145716, 0.127922, 0.00104081, 0.981021)
-bones/17/rotation = Quaternion(0.0383168, -0.009327, -0.0180518, 0.999059)
-bones/18/rotation = Quaternion(-0.0901057, -0.00315232, 0.0373848, 0.995225)
+bones/16/rotation = Quaternion(0.143148, 0.122358, -0.00144987, 0.982108)
+bones/17/rotation = Quaternion(0.0385667, -0.00929238, -0.0181338, 0.999048)
+bones/18/rotation = Quaternion(-0.0898595, -0.00312046, 0.0372942, 0.995251)
 bones/19/rotation = Quaternion(2.98023e-08, 2.98023e-08, 2.98023e-08, 1)
-bones/20/rotation = Quaternion(0.194302, 0.111431, -0.00134171, 0.974591)
-bones/21/rotation = Quaternion(0.0111224, -0.0258283, -0.000283477, 0.999604)
-bones/22/rotation = Quaternion(-0.1639, -0.00379337, 0.0487501, 0.985264)
-bones/24/rotation = Quaternion(0.01499, 0.0859132, 0.0785857, 0.993085)
-bones/25/rotation = Quaternion(0.0817943, -0.039429, -0.0285362, 0.99546)
-bones/26/rotation = Quaternion(-0.049303, -0.0251258, 0.0123737, 0.998391)
+bones/20/rotation = Quaternion(0.186229, 0.107776, 5.89843e-05, 0.976577)
+bones/21/rotation = Quaternion(0.0123781, -0.0257403, -0.000492142, 0.999592)
+bones/22/rotation = Quaternion(-0.162674, -0.00360139, 0.0485097, 0.98548)
+bones/24/rotation = Quaternion(0.00358645, 0.0836895, 0.0810219, 0.993186)
+bones/25/rotation = Quaternion(0.0811447, -0.0394339, -0.0284032, 0.995517)
+bones/26/rotation = Quaternion(-0.0502764, -0.025209, 0.0126286, 0.998337)
 bones/27/rotation = Quaternion(-2.98023e-08, 2.98023e-08, 2.98023e-08, 1)
-bones/28/rotation = Quaternion(-0.0184308, 0.128733, 0.0972356, 0.986729)
-bones/29/rotation = Quaternion(0.19758, -0.0676309, -0.0355028, 0.977306)
-bones/30/rotation = Quaternion(-0.269227, -0.0117263, 0.0452886, 0.96194)
+bones/28/rotation = Quaternion(-0.0301841, 0.128571, 0.0993346, 0.986251)
+bones/29/rotation = Quaternion(0.193298, -0.0678743, -0.0347412, 0.978173)
+bones/30/rotation = Quaternion(-0.273284, -0.0120304, 0.0466833, 0.960724)
 bones/31/rotation = Quaternion(0, 0, 2.98023e-08, 1)
-bones/32/rotation = Quaternion(0.40262, -0.526966, -0.646666, -0.376864)
-bones/33/rotation = Quaternion(0.341203, 0.916796, 0.190506, -0.082296)
-bones/34/rotation = Quaternion(0.0630487, 0.464681, -0.293101, 0.83318)
-bones/35/rotation = Quaternion(0.195333, -0.718936, -0.0708337, 0.663294)
+bones/32/rotation = Quaternion(0.395696, -0.52947, -0.650043, -0.374874)
+bones/33/rotation = Quaternion(0.298075, 0.928511, 0.210937, -0.0672566)
+bones/34/rotation = Quaternion(0.0158856, 0.500473, -0.260474, 0.825486)
+bones/35/rotation = Quaternion(0.178018, -0.70273, -0.0515675, 0.686892)
 bones/36/rotation = Quaternion(0.314222, -0.032412, -0.399445, 0.860614)
 bones/37/rotation = Quaternion(-0.137289, -0.728251, -0.148555, 0.654777)
 bones/38/rotation = Quaternion(0.025295, 0.209305, 0.0931024, 0.973079)
@@ -5721,22 +5724,22 @@ bones/50/rotation = Quaternion(-0.26676, 0.0239578, -0.0567275, 0.961794)
 bones/52/rotation = Quaternion(-0.0251142, -0.0698399, 0.0724121, 0.99461)
 bones/53/rotation = Quaternion(-0.182343, 0.0956312, -0.083824, 0.974977)
 bones/54/rotation = Quaternion(-0.401727, 0.017653, -0.129541, 0.906379)
-bones/56/rotation = Quaternion(0.354447, -0.403814, 0.83872, 0.0886004)
-bones/57/rotation = Quaternion(-0.0378518, 0.920509, 0.371659, -0.114454)
-bones/58/rotation = Quaternion(0.0102562, 0.69794, -0.716074, 0.00362076)
-bones/59/rotation = Quaternion(0.0529205, 0.998589, -0.00414614, 0.00165925)
-bones/61/rotation = Quaternion(-0.0494549, -0.272238, 0.952986, -0.123522)
-bones/62/rotation = Quaternion(-0.0473736, 0.90468, 0.422711, -0.0250072)
-bones/63/rotation = Quaternion(-0.0584293, 0.835794, -0.533178, 0.117283)
-bones/64/rotation = Quaternion(-0.0245196, 0.999592, 0.0047666, 0.013872)
+bones/56/rotation = Quaternion(0.356082, -0.396457, 0.840783, 0.0954505)
+bones/57/rotation = Quaternion(-0.0332101, 0.927115, 0.356938, -0.109321)
+bones/58/rotation = Quaternion(0.0181963, 0.696887, -0.716936, 0.00449469)
+bones/59/rotation = Quaternion(0.0530565, 0.998581, -0.00438502, 0.00168843)
+bones/61/rotation = Quaternion(-0.0417461, -0.270167, 0.955351, -0.112119)
+bones/62/rotation = Quaternion(-0.0444991, 0.915348, 0.399619, -0.0215242)
+bones/63/rotation = Quaternion(-0.0566575, 0.830261, -0.54198, 0.117108)
+bones/64/rotation = Quaternion(-0.0254258, 0.999538, 0.0102028, 0.0131917)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.0728684, -0.923179, -0.3774, -0.740799, 0.203259, -0.640237, 0.667763, 0.326231, -0.669079, 0.434347, 0.750786, 0.0585458)
-bone_name = "mixamorig_RightHandMiddle1"
-bone_idx = 44
+transform = Transform3D(-0.291539, -0.943608, -0.156871, -0.361006, 0.260405, -0.895468, 0.885821, -0.204432, -0.416567, 0.35356, 0.774224, 0.111925)
+bone_name = "RightHand"
+bone_idx = 35
 
 [node name="low_poly_katana" parent="Armature/GeneralSkeleton/BoneAttachment3D" index="0" instance=ExtResource("3_6y05a")]
-transform = Transform3D(-0.00298774, -0.0193602, 0.00403225, 0.0102966, -0.0050046, -0.0163992, 0.0168835, -0.00037388, 0.0107149, -0.0485603, 0.0101062, 0.0121675)
+transform = Transform3D(-0.0060607, -0.0190144, -0.00131267, 0.0132543, -0.00321487, -0.0146284, 0.0136964, -0.00530282, 0.0135753, -0.0977661, -0.0353823, 0.0471234)
 
 [node name="ParryParticles" type="GPUParticles3D" parent="Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana" index="1"]
 transform = Transform3D(50, -1.93715e-05, -7.45057e-06, 1.93715e-05, 50, -2.08616e-05, 7.45057e-06, 2.08616e-05, 50, 0.103619, 22.0815, -1.18076)
@@ -5773,51 +5776,69 @@ animation_path = NodePath("../AnimationTree")
 [node name="StateChart" type="Node" parent="." index="7"]
 script = ExtResource("3_b6y28")
 
-[node name="States" type="Node" parent="StateChart" index="0"]
+[node name="CompoundState" type="Node" parent="StateChart" index="0"]
+script = ExtResource("4_vxgqr")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateChart/CompoundState" index="0"]
+script = ExtResource("5_dw5jx")
+
+[node name="ToFighting" type="Node" parent="StateChart/CompoundState/Idle" index="0"]
+script = ExtResource("6_5ffyg")
+to = NodePath("../../FightingStates")
+event = &"FightStarted"
+delay_seconds = 5.0
+
+[node name="FightingStates" type="Node" parent="StateChart/CompoundState" index="1"]
 script = ExtResource("4_vxgqr")
 initial_state = NodePath("Moving")
 
-[node name="Moving" type="Node" parent="StateChart/States" index="0"]
+[node name="Moving" type="Node" parent="StateChart/CompoundState/FightingStates" index="0"]
 script = ExtResource("5_dw5jx")
 
-[node name="ToBlocking" type="Node" parent="StateChart/States/Moving" index="0"]
+[node name="ToBlocking" type="Node" parent="StateChart/CompoundState/FightingStates/Moving" index="0"]
 script = ExtResource("6_5ffyg")
 to = NodePath("../../Blocking")
 event = &"ToBlocking"
 
-[node name="ToDying" type="Node" parent="StateChart/States/Moving" index="1"]
+[node name="ToDying" type="Node" parent="StateChart/CompoundState/FightingStates/Moving" index="1"]
 script = ExtResource("6_5ffyg")
 to = NodePath("../../Dying")
 event = &"ToDying"
 
-[node name="ToAttacking" type="Node" parent="StateChart/States/Moving" index="2"]
+[node name="ToAttacking" type="Node" parent="StateChart/CompoundState/FightingStates/Moving" index="2"]
 script = ExtResource("6_5ffyg")
 to = NodePath("../../Attacking")
 event = &"ToAttacking"
 
-[node name="Blocking" type="Node" parent="StateChart/States" index="1"]
+[node name="Blocking" type="Node" parent="StateChart/CompoundState/FightingStates" index="1"]
 script = ExtResource("5_dw5jx")
 
-[node name="ToMoving" type="Node" parent="StateChart/States/Blocking" index="0"]
+[node name="ToMoving" type="Node" parent="StateChart/CompoundState/FightingStates/Blocking" index="0"]
 script = ExtResource("6_5ffyg")
 to = NodePath("../../Moving")
 delay_seconds = 0.34
 
-[node name="Attacking" type="Node" parent="StateChart/States" index="2"]
+[node name="Attacking" type="Node" parent="StateChart/CompoundState/FightingStates" index="2"]
 script = ExtResource("5_dw5jx")
 
-[node name="ToMoving" type="Node" parent="StateChart/States/Attacking" index="0"]
+[node name="ToMoving" type="Node" parent="StateChart/CompoundState/FightingStates/Attacking" index="0"]
 script = ExtResource("6_5ffyg")
 to = NodePath("../../Moving")
 delay_seconds = 2.2
 
-[node name="ToDying" type="Node" parent="StateChart/States/Attacking" index="1"]
+[node name="ToDying" type="Node" parent="StateChart/CompoundState/FightingStates/Attacking" index="1"]
 script = ExtResource("6_5ffyg")
 to = NodePath("../../Dying")
 event = &"ToDying"
 
-[node name="Dying" type="Node" parent="StateChart/States" index="3"]
+[node name="Dying" type="Node" parent="StateChart/CompoundState/FightingStates" index="3"]
 script = ExtResource("5_dw5jx")
+
+[node name="ToIdle" type="Node" parent="StateChart/CompoundState/FightingStates" index="4"]
+script = ExtResource("6_5ffyg")
+to = NodePath("../../Idle")
+event = &"FightFinished"
 
 [node name="ParrySFX" type="AudioStreamPlayer3D" parent="." index="8"]
 stream = ExtResource("8_hoctp")
@@ -5831,14 +5852,14 @@ pitch_scale = 0.8
 current = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_not_blocking_hurtbox_area_entered"]
-[connection signal="state_entered" from="StateChart/States/Moving" to="." method="_on_moving_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/States/Moving" to="." method="_on_moving_state_physics_processing"]
-[connection signal="state_processing" from="StateChart/States/Moving" to="." method="_on_moving_state_processing"]
-[connection signal="state_unhandled_input" from="StateChart/States/Moving" to="." method="_on_moving_state_unhandled_input"]
-[connection signal="state_entered" from="StateChart/States/Blocking" to="." method="_on_blocking_state_entered"]
-[connection signal="state_exited" from="StateChart/States/Blocking" to="." method="_on_blocking_state_exited"]
-[connection signal="state_entered" from="StateChart/States/Attacking" to="." method="_on_attacking_state_entered"]
-[connection signal="state_exited" from="StateChart/States/Attacking" to="." method="_on_attacking_state_exited"]
-[connection signal="state_physics_processing" from="StateChart/States/Attacking" to="." method="_on_attacking_state_physics_processing"]
-[connection signal="state_entered" from="StateChart/States/Dying" to="." method="_on_dying_state_entered"]
-[connection signal="state_physics_processing" from="StateChart/States/Dying" to="." method="_on_dying_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/FightingStates/Moving" to="." method="_on_moving_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/CompoundState/FightingStates/Moving" to="." method="_on_moving_state_physics_processing"]
+[connection signal="state_processing" from="StateChart/CompoundState/FightingStates/Moving" to="." method="_on_moving_state_processing"]
+[connection signal="state_unhandled_input" from="StateChart/CompoundState/FightingStates/Moving" to="." method="_on_moving_state_unhandled_input"]
+[connection signal="state_entered" from="StateChart/CompoundState/FightingStates/Blocking" to="." method="_on_blocking_state_entered"]
+[connection signal="state_exited" from="StateChart/CompoundState/FightingStates/Blocking" to="." method="_on_blocking_state_exited"]
+[connection signal="state_entered" from="StateChart/CompoundState/FightingStates/Attacking" to="." method="_on_attacking_state_entered"]
+[connection signal="state_exited" from="StateChart/CompoundState/FightingStates/Attacking" to="." method="_on_attacking_state_exited"]
+[connection signal="state_physics_processing" from="StateChart/CompoundState/FightingStates/Attacking" to="." method="_on_attacking_state_physics_processing"]
+[connection signal="state_entered" from="StateChart/CompoundState/FightingStates/Dying" to="." method="_on_dying_state_entered"]
+[connection signal="state_physics_processing" from="StateChart/CompoundState/FightingStates/Dying" to="." method="_on_dying_state_physics_processing"]
