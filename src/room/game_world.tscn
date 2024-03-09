@@ -15,11 +15,11 @@
 [ext_resource type="Shader" path="res://src/shaders/water_plane_2.gdshader" id="9_y31py"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kbpjf"]
-sky_top_color = Color(0.211765, 0.313726, 0.552941, 1)
-sky_horizon_color = Color(0.545098, 0.686275, 0.811765, 1)
+sky_top_color = Color(0.215686, 0.243137, 0.309804, 1)
+sky_horizon_color = Color(0.454902, 0.576471, 0.678431, 1)
 sky_curve = 0.130583
-ground_bottom_color = Color(0.545098, 0.686275, 0.811765, 1)
-ground_horizon_color = Color(0.545098, 0.686275, 0.811765, 1)
+ground_bottom_color = Color(0.454902, 0.576471, 0.678431, 1)
+ground_horizon_color = Color(0.454902, 0.576471, 0.678431, 1)
 
 [sub_resource type="Sky" id="Sky_ssrbx"]
 sky_material = SubResource("ProceduralSkyMaterial_kbpjf")
@@ -30,7 +30,6 @@ sky = SubResource("Sky_ssrbx")
 ambient_light_color = Color(1, 1, 1, 1)
 ambient_light_sky_contribution = 0.0
 ambient_light_energy = 2.0
-reflected_light_source = 2
 tonemap_mode = 2
 tonemap_white = 16.0
 volumetric_fog_density = 0.0155
