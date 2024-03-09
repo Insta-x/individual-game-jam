@@ -17,6 +17,9 @@ signal dead
 @export var hurtbox: Area3D
 @export var hitbox_collision: CollisionShape3D
 @export var debug_label: Label3D
+@export_subgroup("Audio")
+@export var parry_sfx: AudioStreamPlayer3D
+@export var hit_sfx: AudioStreamPlayer3D
 
 @export_group("External Node Dependencies")
 @export var player: Player
@@ -52,6 +55,11 @@ func smooth_look_at(delta: float) -> void:
 	transform = transform.interpolate_with(new_transform, turning_speed * delta)
 
 
+func play_parry_sfx() -> void:
+	parry_sfx.pitch_scale = randf_range(0.5, 0.7)
+	parry_sfx.play()
+
+
 #region Observing State
 func _on_observing_state_entered() -> void:
 	debug_label.text = "Observing"
@@ -59,9 +67,12 @@ func _on_observing_state_entered() -> void:
 	animation_tree_travel("Move")
 	
 	# Random Move for the duration
-	move_vector = Vector2.LEFT.rotated(randf_range(0, PI / 6))
-	if randf() > 0.5:
-		move_vector.x *= -1
+	if randf() > 0.3:
+		move_vector = Vector2.LEFT.rotated(randf_range(-PI / 8, PI / 6))
+		if randf() > 0.5:
+			move_vector.x *= -1
+	else:
+		move_vector = Vector2.ZERO
 	
 	# TODO: Proper change state to attacking
 	await get_tree().create_timer(randf_range(2, 4)).timeout
@@ -120,7 +131,8 @@ func _on_closing_in_state_exited() -> void:
 func _on_attacking_state_entered() -> void:
 	debug_label.text = "Attacking"
 	
-	animation_tree_travel("360-attack")
+	animation_tree.set("parameters/Attack/blend_position", randf())
+	animation_tree_travel("Attack")
 	
 	hurtbox.area_entered.disconnect(_on_not_attacking_hurtbox_area_entered)
 	hurtbox.area_entered.connect(_on_attacking_hurtbox_area_entered)
@@ -136,12 +148,12 @@ func _on_attacking_state_processing(delta: float) -> void:
 
 
 func _on_attacking_hurtbox_area_entered(area: Area3D) -> void:
-	print("ENEMY ATTACKED")
+	hit_sfx.play()
 	state_chart.send_event("ToReacting")
 
 
 func _on_attacking_state_exited() -> void:
-	hitbox_collision.disabled = true
+	hitbox_collision.set_deferred("disabled", true)
 	
 	hurtbox.area_entered.connect(_on_not_attacking_hurtbox_area_entered)
 	hurtbox.area_entered.disconnect(_on_attacking_hurtbox_area_entered)
@@ -151,12 +163,13 @@ func _on_attacking_state_exited() -> void:
 #region Blocking State
 func _on_blocking_state_entered() -> void:
 	animation_tree_travel("block-react")
+	play_parry_sfx()
 #endregion
 
 
 #region Reacting State
 func _on_reacting_state_entered() -> void:
-	animation_tree_travel("Standing React Large Gut")
+	animation_tree_travel("react-from-left")
 #endregion
 
 

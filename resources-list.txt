@@ -3,6 +3,13 @@ Samurai Model 1: https://sketchfab.com/3d-models/low-poly-samurai-a-sucker-punch
 Samurai Model 2: https://sketchfab.com/3d-models/low-poly-samurai-c-sucker-punch-f80709bf9e4f442e98ee1eb233c584dd
 "Low-Poly Samurai C (Sucker Punch)" (https://skfb.ly/oFRvJ) by DavidA3D is licensed under Creative Commons Attribution-NonCommercial (http://creativecommons.org/licenses/by-nc/4.0/).
 
+Katana Decorated: https://sketchfab.com/3d-models/katana-b061754e94ce434cbe1396b3bb6d8abc
+"Katana" (https://skfb.ly/U866) by aneeqayounas is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+---------------------------------------------------------------------------------------------------
+
+USED ASSETS
+
 Low Poly Archer: https://sketchfab.com/3d-models/low-poly-archer-764ed986214f4e81b1e42a4a93f17faa
 "Low-poly Archer" (https://skfb.ly/6VUT6) by Daniel Darko is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
@@ -12,6 +19,8 @@ Low Poly Samural: https://sketchfab.com/3d-models/low-poly-samurai-bb59b046d8d74
 Low Poly Katana: https://sketchfab.com/3d-models/low-poly-katana-d3f000ef4ee247b7999ec3116324c15d
 "Low Poly Katana" (https://skfb.ly/oqAAX) by JeemoBoy is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
 
-Katana Decorated: https://sketchfab.com/3d-models/katana-b061754e94ce434cbe1396b3bb6d8abc
-"Katana" (https://skfb.ly/U866) by aneeqayounas is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+Sword Clashing Sound: https://soundbible.com/857-Swords-Clashing.html
+by Mike Koenig is licensed under Creative Commons Attribution 3.0 (https://creativecommons.org/licenses/by/3.0/).
 
+Hit Sound: https://freesound.org/people/SypherZent/sounds/420674/
+by SypherZent is licensed under Creative Commons 0 (https://creativecommons.org/publicdomain/zero/1.0/).

@@ -1,0 +1,40 @@
+[remap]
+
+importer="animation_library"
+importer_version=1
+type="AnimationLibrary"
+uid="uid://ejsrhh0tljfi"
+path="res://.godot/imported/enemy_animations.glb-aa06e1c41186d7a02a1cacd3766810ac.res"
+
+[deps]
+
+source_file="res://assets/animation_libraries/enemy_animations.glb"
+dest_files=["res://.godot/imported/enemy_animations.glb-aa06e1c41186d7a02a1cacd3766810ac.res"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"nodes": {
+"PATH:Armature/Skeleton3D": {
+"retarget/bone_map": Resource("res://assets/bone_maps/mixamo_bipedal_bone_map.tres")
+}
+}
+}
+gltf/naming_version=1
+gltf/embedded_image_handling=1

@@ -19,6 +19,10 @@ signal dead
 @export var state_chart: StateChart
 @export var hurtbox: Area3D
 @export var hitbox_collision: CollisionShape3D
+@export var parry_particles: GPUParticles3D
+@export_subgroup("Audio")
+@export var parry_sfx: AudioStreamPlayer3D
+@export var hit_sfx: AudioStreamPlayer3D
 
 @export_group("External Node Dependencies")
 @export var player_pcam: PhantomCamera3D
@@ -48,6 +52,11 @@ func smooth_look_at(delta: float) -> void:
 	target_position.y = 0
 	var new_transform := transform.looking_at(target_position, Vector3.UP)
 	transform = transform.interpolate_with(new_transform, turning_speed * delta)
+
+
+func play_parry_sfx() -> void:
+	parry_sfx.pitch_scale = randf_range(0.5, 0.7)
+	parry_sfx.play()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -103,6 +112,8 @@ func _on_blocking_state_entered() -> void:
 
 func _on_blocking_hurtbox_detected(area: Area3D) -> void:
 	animation_tree_travel("block-react")
+	play_parry_sfx()
+	parry_particles.emitting = true
 	attack_charge = clampi(attack_charge + 1, 0, 5)
 
 
@@ -124,7 +135,7 @@ func _on_attacking_state_physics_processing(delta: float) -> void:
 
 
 func _on_attacking_state_exited() -> void:
-	hitbox_collision.disabled = true
+	hitbox_collision.set_deferred("disabled", true)
 #endregion
 
 
@@ -145,4 +156,5 @@ func die() -> void:
 
 
 func _on_not_blocking_hurtbox_area_entered(area: Area3D) -> void:
+	hit_sfx.play()
 	die()
