@@ -12,7 +12,7 @@ func _ready() -> void:
 
 
 func lose_cinematic() -> void:
-	cinematic_anim.play("die")
+	cinematic_anim.play("player_lose")
 
 
 func on_fight_start() -> void:

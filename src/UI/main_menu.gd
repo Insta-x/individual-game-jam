@@ -4,6 +4,7 @@ extends Control
 func _ready() -> void:
 	GlobalSignals.fight_finished.connect(
 		func(_player_win: bool) -> void:
+			await get_tree().create_timer(7.5).timeout
 			show()
 	)
 

@@ -163,6 +163,7 @@ func die() -> void:
 
 
 func on_fight_start() -> void:
+	animation_tree_travel("Move")
 	state_chart.send_event("FightStarted")
 
 
