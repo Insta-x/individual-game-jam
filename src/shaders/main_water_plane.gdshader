@@ -1,5 +1,7 @@
 shader_type spatial;
 
+const float SQUARE_ROOT_2 = 1.41421356237;
+
 uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
@@ -96,4 +98,5 @@ void fragment() {
 	//ALBEDO = vec3(simulation_normal.b, 0, 0);
 	
 	NORMAL = mix(NORMAL, simulation_normal, simulation_normal.r / 8.0);
+	ALPHA = clamp(1.0 - pow(length(UV - vec2(0.5)) * 2.0, 14.0), 0.0, 1.0);
 }

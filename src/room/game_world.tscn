@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dycl6bmv8boim"]
+[gd_scene load_steps=57 format=3 uid="uid://dycl6bmv8boim"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4837n"]
 [ext_resource type="Script" path="res://src/room/game_world.gd" id="1_p6t0b"]
@@ -127,7 +127,10 @@ _data = {
 "player_lose": SubResource("Animation_smnh1")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdxkq"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0l5rh"]
+next_pass = SubResource("ShaderMaterial_gdxkq")
 albedo_texture = ExtResource("1_w5huj")
 uv1_triplanar = true
 
