@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dycl6bmv8boim"]
+[gd_scene load_steps=56 format=3 uid="uid://dycl6bmv8boim"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4837n"]
 [ext_resource type="Script" path="res://src/room/game_world.gd" id="1_p6t0b"]
@@ -12,7 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://bapbgoptotddq" path="res://src/actors/player/player.tscn" id="6_m3h3g"]
 [ext_resource type="PackedScene" uid="uid://bvo40esytcysp" path="res://src/actors/enemy/enemy.tscn" id="7_2kh4i"]
 [ext_resource type="Shader" uid="uid://ce5qskk6t65j3" path="res://src/shaders/water_simulation_buffer.tres" id="7_aytmv"]
-[ext_resource type="Shader" path="res://src/shaders/water_plane_2.gdshader" id="9_y31py"]
+[ext_resource type="Material" uid="uid://dob40sonvr4e5" path="res://src/shaders/main_water_plane.tres" id="13_c45o0"]
+[ext_resource type="Shader" path="res://src/shaders/top_cloud.gdshader" id="14_v43i1"]
+[ext_resource type="Shader" path="res://src/shaders/bottom_cloud.gdshader" id="15_umuui"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kbpjf"]
 sky_top_color = Color(0.215686, 0.243137, 0.309804, 1)
@@ -32,7 +34,10 @@ ambient_light_sky_contribution = 0.0
 ambient_light_energy = 2.0
 tonemap_mode = 2
 tonemap_white = 16.0
-volumetric_fog_density = 0.0155
+fog_enabled = true
+fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
+fog_sky_affect = 0.7
+volumetric_fog_emission = Color(1, 1, 1, 1)
 
 [sub_resource type="Resource" id="Resource_185ti"]
 script = ExtResource("4_50l7u")
@@ -161,65 +166,8 @@ resource_local_to_scene = true
 shader = ExtResource("7_aytmv")
 shader_parameter/SimulationTexture = SubResource("ViewportTexture_nww45")
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_0s5tx"]
-noise_type = 3
-seed = 1
-fractal_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e0aea"]
-seamless = true
-as_normal_map = true
-bump_strength = 3.0
-noise = SubResource("FastNoiseLite_0s5tx")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_hkhb6"]
-noise_type = 3
-fractal_type = 2
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cg37w"]
-seamless = true
-as_normal_map = true
-bump_strength = 3.0
-noise = SubResource("FastNoiseLite_hkhb6")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_hp0uo"]
-viewport_path = NodePath("Simulation")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mpw8r"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_r5lbm"]
-seamless = true
-noise = SubResource("FastNoiseLite_mpw8r")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_60a7t"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("9_y31py")
-shader_parameter/albedo = Color(0, 0, 0, 1)
-shader_parameter/fresnel_albedo = Color(0, 0, 0, 1)
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 0.02
-shader_parameter/wave_direction = Vector2(1, 0)
-shader_parameter/wave_direction2 = Vector2(0, 1)
-shader_parameter/wave_time_scale = 0.025
-shader_parameter/noise_scale = 10.0
-shader_parameter/height_scale = 0.1
-shader_parameter/color_deep = Color(0, 0, 0, 1)
-shader_parameter/color_shallow = Color(0, 0, 0, 1)
-shader_parameter/beers_law = 2.0
-shader_parameter/depth_offset = -0.75
-shader_parameter/edge_scale = 0.2
-shader_parameter/near = 0.5
-shader_parameter/far = 100.0
-shader_parameter/edge_color = Color(1, 1, 1, 1)
-shader_parameter/amplitude = 0.2
-shader_parameter/normal_texture = SubResource("NoiseTexture2D_e0aea")
-shader_parameter/normal_texture2 = SubResource("NoiseTexture2D_cg37w")
-shader_parameter/wave = SubResource("NoiseTexture2D_r5lbm")
-shader_parameter/simulation_texture = SubResource("ViewportTexture_hp0uo")
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_vbclh"]
-material = SubResource("ShaderMaterial_60a7t")
+material = ExtResource("13_c45o0")
 size = Vector2(30, 30)
 subdivide_width = 200
 subdivide_depth = 200
@@ -273,6 +221,101 @@ _data = {
 "bounce": SubResource("Animation_mou6a")
 }
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ukiqw"]
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8lixk"]
+noise = SubResource("FastNoiseLite_ukiqw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_unayd"]
+render_priority = 0
+shader = ExtResource("14_v43i1")
+shader_parameter/albedo = Color(0.501961, 0.501961, 0.501961, 1)
+shader_parameter/timeScale1 = 0.003
+shader_parameter/timeScale2 = 0.005
+shader_parameter/cloud1worldScale = 0.005
+shader_parameter/cloud2worldScale = 0.01
+shader_parameter/displacementStrength = 17.885
+shader_parameter/discardHeight = 48.0
+shader_parameter/Noise1 = SubResource("NoiseTexture2D_8lixk")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_6tq8v"]
+material = SubResource("ShaderMaterial_unayd")
+size = Vector2(1000, 1000)
+subdivide_width = 200
+subdivide_depth = 200
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3vwdc"]
+fractal_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vnvue"]
+noise = SubResource("FastNoiseLite_3vwdc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g7vit"]
+render_priority = 0
+shader = ExtResource("15_umuui")
+shader_parameter/albedo = Color(0.360784, 0.360784, 0.360784, 1)
+shader_parameter/timeScale1 = 0.003
+shader_parameter/timeScale2 = 0.005
+shader_parameter/cloud1worldScale = 0.005
+shader_parameter/cloud2worldScale = 0.01
+shader_parameter/displacementStrength = 7.02
+shader_parameter/discardHeight = 46.0
+shader_parameter/Noise1 = SubResource("NoiseTexture2D_vnvue")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pmsbt"]
+material = SubResource("ShaderMaterial_g7vit")
+size = Vector2(1000, 1000)
+subdivide_width = 200
+subdivide_depth = 200
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cmmc0"]
+emission_shape_scale = Vector3(15, 0.5, 15)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 5.0
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+color = Color(0.796078, 0.870588, 0.866667, 1)
+collision_mode = 1
+collision_friction = 0.0
+collision_bounce = 0.0
+sub_emitter_mode = 3
+sub_emitter_amount_at_collision = 1
+
+[sub_resource type="Curve" id="Curve_wwn5l"]
+max_value = 0.1
+_data = [Vector2(0, 0), 0.0, 0.347253, 0, 0, Vector2(0.0337553, 0.0505495), 0.395482, 0.395482, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pwrgj"]
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+use_particle_trails = true
+
+[sub_resource type="RibbonTrailMesh" id="RibbonTrailMesh_2wui3"]
+material = SubResource("StandardMaterial3D_pwrgj")
+size = 0.2
+curve = SubResource("Curve_wwn5l")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5xvd8"]
+gravity = Vector3(0, 0, 0)
+attractor_interaction_enabled = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_okf2m"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_pnavx"]
+material = SubResource("StandardMaterial3D_okf2m")
+radius = 0.025
+height = 0.05
+radial_segments = 8
+rings = 4
+
 [node name="GameWorld" type="Node3D" node_paths=PackedStringArray("debug_displays", "player", "enemy", "player_start", "enemy_start")]
 script = ExtResource("1_p6t0b")
 debug_displays = [null, null, null]
@@ -282,7 +325,7 @@ player_start = NodePath("PlayerStartMarker")
 enemy_start = NodePath("EnemyStartMarker")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 light_energy = 2.0
 shadow_enabled = true
 
@@ -395,7 +438,7 @@ player = NodePath("../PlayerGroup/Player")
 
 [node name="Simulation" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(514, 512)
+size = Vector2i(1024, 1024)
 render_target_clear_mode = 2
 render_target_update_mode = 4
 
@@ -410,7 +453,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="SimultationBuffer" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(514, 512)
+size = Vector2i(1024, 1024)
 render_target_clear_mode = 2
 render_target_update_mode = 4
 
@@ -425,12 +468,16 @@ color = Color(0, 0, 0, 1)
 
 [node name="WaterPlane" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-visible = false
+cast_shadow = 0
 mesh = SubResource("PlaneMesh_vbclh")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="WaterPlane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
+size = Vector3(30, 1, 30)
 
 [node name="WaterCollision" type="SubViewport" parent="."]
 handle_input_locally = false
-size = Vector2i(514, 512)
+size = Vector2i(1024, 1024)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="WaterCollision"]
@@ -457,3 +504,34 @@ root_node = NodePath("../..")
 libraries = {
 "": SubResource("AnimationLibrary_uqids")
 }
+
+[node name="TopCloud" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 44, 0)
+mesh = SubResource("PlaneMesh_6tq8v")
+
+[node name="BottomCloud" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 44, 0)
+mesh = SubResource("PlaneMesh_pmsbt")
+
+[node name="RainParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.999523, 0.0308874, 0, -0.0308874, 0.999523, 0, 10, 0)
+amount = 100
+sub_emitter = NodePath("DropWaterParticles")
+lifetime = 0.6
+randomness = 0.4
+interpolate = false
+fract_delta = false
+visibility_aabb = AABB(-15, -10, -15, 30, 10, 30)
+trail_enabled = true
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_cmmc0")
+draw_pass_1 = SubResource("RibbonTrailMesh_2wui3")
+
+[node name="DropWaterParticles" type="GPUParticles3D" parent="RainParticles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9, 0)
+layers = 524288
+amount = 1000
+lifetime = 0.1
+visibility_aabb = AABB(-15, -4, -15, 30, 4, 30)
+process_material = SubResource("ParticleProcessMaterial_5xvd8")
+draw_pass_1 = SubResource("SphereMesh_pnavx")

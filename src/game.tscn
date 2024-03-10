@@ -7,7 +7,8 @@
 [node name="Game" type="Node"]
 script = ExtResource("1_lowl7")
 
-[node name="GameWorld" parent="." instance=ExtResource("1_gd7tl")]
+[node name="GameWorld" parent="." node_paths=PackedStringArray("debug_displays") instance=ExtResource("1_gd7tl")]
+debug_displays = [null, null, null]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

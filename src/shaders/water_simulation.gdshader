@@ -8,8 +8,8 @@ uniform float attenuation = 0.999;
 uniform float deltaUV = 3.0;
 
 void fragment() {
-	float dv = 1.0 / 514.0;
-	float du = 1.0 / 514.0;
+	float dv = 1.0 / 1024.0;
+	float du = 1.0 / 1024.0;
 	vec3 duv = vec3(du, dv, 0) * deltaUV;
 
 	vec3 c = texture(sim_tex, UV).rgb;
