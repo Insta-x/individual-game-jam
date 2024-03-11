@@ -35,10 +35,12 @@ ambient_light_sky_contribution = 0.0
 ambient_light_energy = 2.0
 tonemap_mode = 2
 tonemap_white = 16.0
+glow_enabled = true
 fog_enabled = true
 fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)
 fog_sky_affect = 0.7
-volumetric_fog_emission = Color(1, 1, 1, 1)
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
 
 [sub_resource type="Resource" id="Resource_185ti"]
 script = ExtResource("4_50l7u")
@@ -70,7 +72,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../CinematicPCamManager/EntrancePCam:priority")
+tracks/1/path = NodePath("../CinematicPCamManager/MenuPCam:priority")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -160,7 +162,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../CinematicPCamManager/EntrancePCam:priority")
+tracks/4/path = NodePath("../CinematicPCamManager/MenuPCam:priority")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -214,7 +216,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../CinematicPCamManager/EntrancePCam:priority")
+tracks/3/path = NodePath("../CinematicPCamManager/MenuPCam:priority")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -449,20 +451,20 @@ script = ExtResource("1_4837n")
 
 [node name="CinematicPCamManager" type="Node" parent="." node_paths=PackedStringArray("entrance_pcam", "die_pcam", "cinematic_anim")]
 script = ExtResource("3_ctpe6")
-entrance_pcam = NodePath("EntrancePCam")
+entrance_pcam = NodePath("MenuPCam")
 die_pcam = NodePath("DiePhantomCamera3D")
 cinematic_anim = NodePath("CinematicAnimationPlayer")
 
-[node name="EntrancePCamMarker" type="Marker3D" parent="CinematicPCamManager"]
+[node name="MenuPCamMarker" type="Marker3D" parent="CinematicPCamManager"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
-[node name="EntrancePCam" type="Node3D" parent="CinematicPCamManager"]
+[node name="MenuPCam" type="Node3D" parent="CinematicPCamManager"]
 transform = Transform3D(1, 0, 0, 0, 0.857493, 0.514496, 0, -0.514496, 0.857493, 0, 3, 0)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 100
 follow_mode = 1
-follow_target = NodePath("../EntrancePCamMarker")
+follow_target = NodePath("../MenuPCamMarker")
 follow_parameters/damping = false
 look_at_mode = 2
 look_at_target = NodePath("../../Enemy")
