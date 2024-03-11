@@ -70,6 +70,15 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_viewport().set_input_as_handled()
 
 
+#region Idle State
+func _on_idle_state_entered() -> void:
+	animation_tree_travel("Move")
+	input_vector = Vector2.ZERO
+	locomotion_vector = Vector2.ZERO
+	animation_tree.set("parameters/Move/blend_position", Vector2.ZERO)
+#endregion
+
+
 #region Moving State
 func _on_moving_state_entered() -> void:
 	animation_tree_travel("Move")
@@ -158,18 +167,18 @@ func _on_dying_state_physics_processing(delta: float) -> void:
 
 
 func die() -> void:
-	state_chart.send_event("ToDying")
+	state_chart.send_event("Died")
 	GlobalSignals.fight_finished.emit(false)
 
 
 func on_fight_start() -> void:
 	set_pcam_rotation()
-	animation_tree_travel("Move")
 	state_chart.send_event("FightStarted")
 
 
-func on_fight_finished(_player_win: bool) -> void:
-	state_chart.send_event("FightFinished")
+func on_fight_finished(player_win: bool) -> void:
+	if player_win:
+		state_chart.send_event("Won")
 
 
 func _on_not_blocking_hurtbox_area_entered(area: Area3D) -> void:

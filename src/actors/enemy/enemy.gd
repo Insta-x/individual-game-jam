@@ -3,6 +3,8 @@ extends CharacterBody3D
 class_name Enemy
 
 
+const MAX_HP: int = 1
+
 signal dead
 
 @export var turning_speed := 1.0
@@ -27,6 +29,12 @@ signal dead
 
 var move_vector := Vector2.ZERO
 var locomotion_vector := Vector2.ZERO
+
+var hp: int = MAX_HP :
+	set(value):
+		hp = value
+		if hp == 0:
+			state_chart.send_event("Died")
 
 
 func _ready() -> void:
@@ -66,6 +74,17 @@ func smooth_look_at(delta: float) -> void:
 func play_parry_sfx() -> void:
 	parry_sfx.pitch_scale = randf_range(0.5, 0.7)
 	parry_sfx.play()
+
+
+#region Idle State
+func _on_idle_state_entered() -> void:
+	debug_label.text = "Idle"
+	
+	animation_tree_travel("Move")
+	move_vector = Vector2.ZERO
+	locomotion_vector = Vector2.ZERO
+	animation_tree.set("parameters/Move/blend_position", Vector2.ZERO)
+#endregion
 
 
 #region Observing State
@@ -157,6 +176,7 @@ func _on_attacking_state_processing(delta: float) -> void:
 
 func _on_attacking_hurtbox_area_entered(area: Area3D) -> void:
 	hit_sfx.play()
+	hp -= 1
 	state_chart.send_event("ToReacting")
 
 
@@ -190,12 +210,22 @@ func _on_reacting_state_physics_processing(delta: float) -> void:
 #endregion
 
 
+#region Dying State
+func _on_dying_state_entered() -> void:
+	GlobalSignals.fight_finished.emit(true)
+	hitbox_collision.set_deferred("disabled", true)
+	animation_tree_travel("dying")
+#endregion
+
+
 func on_fight_start() -> void:
+	hp = MAX_HP
 	state_chart.send_event("FightStarted")
 
 
-func on_fight_finished(_player_win: bool) -> void:
-	state_chart.send_event("FightFinished")
+func on_fight_finished(player_win: bool) -> void:
+	if not player_win:
+		state_chart.send_event("Won")
 
 
 func _on_not_attacking_hurtbox_area_entered(area: Area3D) -> void:

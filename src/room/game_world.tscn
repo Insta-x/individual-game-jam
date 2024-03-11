@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://dycl6bmv8boim"]
+[gd_scene load_steps=59 format=3 uid="uid://dycl6bmv8boim"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4837n"]
 [ext_resource type="Script" path="res://src/room/game_world.gd" id="1_p6t0b"]
@@ -15,6 +15,7 @@
 [ext_resource type="Material" uid="uid://dob40sonvr4e5" path="res://src/shaders/main_water_plane.tres" id="13_c45o0"]
 [ext_resource type="Shader" path="res://src/shaders/top_cloud.gdshader" id="14_v43i1"]
 [ext_resource type="Shader" path="res://src/shaders/bottom_cloud.gdshader" id="15_umuui"]
+[ext_resource type="PackedScene" uid="uid://dvyjm7y0yr446" path="res://src/UI/main_menu.tscn" id="16_1n8qy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kbpjf"]
 sky_top_color = Color(0.215686, 0.243137, 0.309804, 1)
@@ -78,10 +79,34 @@ tracks/1/keys = {
 "update": 1,
 "values": [100]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../GUI/BlackScreenTransition:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../GUI/MainMenu:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_smnh1"]
 resource_name = "player_lose"
-length = 7.0
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,42 +114,121 @@ tracks/0/path = NodePath("../CinematicPCamManager/DiePhantomCamera3D:priority")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.6, 7),
+"times": PackedFloat32Array(0.6, 6.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [10, 0]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("../CinematicPCamManager/EntrancePCam:priority")
+tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(7),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [100]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("..")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(7),
+"times": PackedFloat32Array(6.5),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"reset_actors"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../GUI/BlackScreenTransition:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(4, 6, 7.5, 9.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../GUI/MainMenu:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(10),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CinematicPCamManager/EntrancePCam:priority")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(6.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [100]
+}
+
+[sub_resource type="Animation" id="Animation_upt1k"]
+resource_name = "player_win"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../GUI/BlackScreenTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(4, 6, 7.5, 9.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(6.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"reset_actors"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../GUI/MainMenu:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(10),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CinematicPCamManager/EntrancePCam:priority")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(6.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [100]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pvsqw"]
 _data = {
 "RESET": SubResource("Animation_l27e5"),
-"player_lose": SubResource("Animation_smnh1")
+"player_lose": SubResource("Animation_smnh1"),
+"player_win": SubResource("Animation_upt1k")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gdxkq"]
@@ -538,3 +642,17 @@ lifetime = 0.1
 visibility_aabb = AABB(-15, -4, -15, 30, 4, 30)
 process_material = SubResource("ParticleProcessMaterial_5xvd8")
 draw_pass_1 = SubResource("SphereMesh_pnavx")
+
+[node name="GUI" type="CanvasLayer" parent="."]
+
+[node name="MainMenu" parent="GUI" instance=ExtResource("16_1n8qy")]
+
+[node name="BlackScreenTransition" type="ColorRect" parent="GUI"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)

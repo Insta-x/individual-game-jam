@@ -11,6 +11,10 @@ func _ready() -> void:
 	GlobalSignals.fight_finished.connect(on_fight_finished)
 
 
+func win_cinematic() -> void:
+	cinematic_anim.play("player_win")
+
+
 func lose_cinematic() -> void:
 	cinematic_anim.play("player_lose")
 
@@ -21,6 +25,6 @@ func on_fight_start() -> void:
 
 func on_fight_finished(player_win: bool) -> void:
 	if player_win:
-		pass
+		win_cinematic()
 	else:
 		lose_cinematic()
