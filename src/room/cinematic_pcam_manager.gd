@@ -3,24 +3,29 @@ extends Node
 
 @export var entrance_pcam: PhantomCamera3D
 @export var die_pcam: PhantomCamera3D
-@export var cinematic_anim: AnimationPlayer
+@export var anim_player: AnimationPlayer
 
 
 func _ready() -> void:
+	GlobalSignals.game_begin.connect(
+		func() -> void:
+			anim_player.play("RESET")
+			anim_player.play("beginning")
+	)
 	GlobalSignals.fight_start.connect(on_fight_start)
 	GlobalSignals.fight_finished.connect(on_fight_finished)
 
 
 func win_cinematic() -> void:
-	cinematic_anim.play("player_win")
+	anim_player.play("player_win")
 
 
 func lose_cinematic() -> void:
-	cinematic_anim.play("player_lose")
+	anim_player.play("player_lose")
 
 
 func on_fight_start() -> void:
-	entrance_pcam.set_priority(0)
+	anim_player.play("fight-start")
 
 
 func on_fight_finished(player_win: bool) -> void:
@@ -28,3 +33,7 @@ func on_fight_finished(player_win: bool) -> void:
 		win_cinematic()
 	else:
 		lose_cinematic()
+	
+	await anim_player.animation_finished
+	
+	anim_player.play("beginning")

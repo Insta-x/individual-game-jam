@@ -5853,7 +5853,7 @@ script = ExtResource("5_dw5jx")
 script = ExtResource("6_5ffyg")
 to = NodePath("../../FightingStates")
 event = &"FightStarted"
-delay_seconds = 5.0
+delay_seconds = 10.0
 
 [node name="FightingStates" type="Node" parent="StateChart/CompoundState" index="1"]
 script = ExtResource("4_vxgqr")

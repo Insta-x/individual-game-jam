@@ -2,7 +2,24 @@ extends CharacterBody3D
 
 
 @export_group("Internal Node Dependencies")
+@export var state_chart: StateChart
 @export var animation_player: AnimationPlayer
+@export var flaming_orb: Node3D
+
+
+func _ready() -> void:
+	GlobalSignals.game_begin.connect(
+		func() -> void:
+			state_chart.send_event("GameBegin")
+	)
+	GlobalSignals.fight_start.connect(
+		func() -> void:
+			state_chart.send_event("FightStarted")
+	)
+	GlobalSignals.fight_finished.connect(
+		func(player_win: bool) -> void:
+			state_chart.send_event("PlayerWin" if player_win else "PlayerLose")
+	)
 
 
 func root_motion_movement(delta: float, move_factor := 1.0) -> void:
@@ -13,3 +30,28 @@ func root_motion_movement(delta: float, move_factor := 1.0) -> void:
 func _physics_process(delta: float) -> void:
 	root_motion_movement(delta)
 	move_and_slide()
+
+
+func _on_waiting_state_entered() -> void:
+	hide()
+
+
+func _on_waiting_state_exited() -> void:
+	show()
+
+
+func _on_walking_state_entered() -> void:
+	animation_player.play("walking")
+
+
+func _on_standing_state_entered() -> void:
+	animation_player.play("idle")
+	flaming_orb.show()
+
+
+func _on_standing_state_exited() -> void:
+	flaming_orb.hide()
+
+
+func _on_transform_state_entered() -> void:
+	animation_player.play("transform")
