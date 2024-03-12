@@ -17,8 +17,8 @@ func _ready() -> void:
 			state_chart.send_event("FightStarted")
 	)
 	GlobalSignals.fight_finished.connect(
-		func(_p: bool) -> void:
-			state_chart.send_event("FightFinished")
+		func(player_win: bool) -> void:
+			state_chart.send_event("PlayerWon" if player_win else "PlayerLose")
 	)
 
 
@@ -34,6 +34,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_waiting_state_entered() -> void:
 	hide()
+	animation_player.play("T-Pose")
 
 
 func _on_waiting_state_exited() -> void:
