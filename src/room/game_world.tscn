@@ -574,8 +574,8 @@ cinematic_player = NodePath("CinematicPCamManager/CinematicPlayer")
 cinematic_enemy = NodePath("CinematicPCamManager/CinematicEnemy")
 player_start = NodePath("PlayerStartMarker")
 enemy_start = NodePath("EnemyStartMarker")
-cinematic_player_start = NodePath("CinematicPCamManager/CinematicPlayerStart")
-cinematic_enemy_start = NodePath("CinematicPCamManager/CinematicEnemyStart")
+cinematic_player_start = NodePath("CinematicPCamManager/ActorMarkers/CinematicPlayerStart")
+cinematic_enemy_start = NodePath("CinematicPCamManager/ActorMarkers/CinematicEnemyStart")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -586,7 +586,7 @@ shadow_enabled = true
 environment = SubResource("Environment_uskuc")
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.857493, 0.514496, 0, -0.514496, 0.857493, 0, 3, 0)
+transform = Transform3D(-1, 4.84934e-08, -7.27401e-08, 0, 0.83205, 0.5547, 8.74228e-08, 0.5547, -0.83205, 0, 3, 2)
 cull_mask = 524287
 current = true
 
@@ -599,14 +599,21 @@ entrance_pcam = NodePath("MenuPCam")
 die_pcam = NodePath("DiePCam")
 anim_player = NodePath("CinematicAnimationPlayer")
 
-[node name="CinematicPlayerStart" type="Marker3D" parent="CinematicPCamManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.01476)
+[node name="ActorMarkers" type="Node" parent="CinematicPCamManager"]
 
-[node name="CinematicEnemyStart" type="Marker3D" parent="CinematicPCamManager"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -8.12461)
+[node name="CinematicPlayerStart" type="Marker3D" parent="CinematicPCamManager/ActorMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
 
-[node name="MenuPCamMarker" type="Marker3D" parent="CinematicPCamManager"]
+[node name="CinematicEnemyStart" type="Marker3D" parent="CinematicPCamManager/ActorMarkers"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)
+
+[node name="PCamMarkers" type="Node" parent="CinematicPCamManager"]
+
+[node name="MenuPCamMarker" type="Marker3D" parent="CinematicPCamManager/PCamMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+
+[node name="PlayerWalkPCamMarker" type="Marker3D" parent="CinematicPCamManager/PCamMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
 
 [node name="MenuPCam" type="Node3D" parent="CinematicPCamManager"]
 transform = Transform3D(1, 0, 0, 0, 0.857493, 0.514496, 0, -0.514496, 0.857493, 0, 3, 0)
@@ -614,7 +621,7 @@ script = ExtResource("3_eciol")
 priority_override = false
 priority = 0
 follow_mode = 1
-follow_target = NodePath("../MenuPCamMarker")
+follow_target = NodePath("../PCamMarkers/MenuPCamMarker")
 follow_parameters/damping = false
 look_at_mode = 2
 look_at_target = NodePath("../../Enemy")
@@ -625,7 +632,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_yh1dk")
 
 [node name="EnemyWalkPCam" type="Node3D" parent="CinematicPCamManager"]
-transform = Transform3D(-4.37114e-08, 0.229897, -0.973206, 0, 0.973206, 0.229897, 1, 1.00491e-08, -4.25402e-08, -1.11458, 0.663293, -8.12461)
+transform = Transform3D(-4.37114e-08, 0.391273, -0.920262, 0, 0.920262, 0.391273, 1, 1.71031e-08, -4.02259e-08, -1.17518, 0.899657, -12.6)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 101
@@ -640,24 +647,21 @@ tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_yh1dk")
 
-[node name="PlayerWalkPCamMarker" type="Marker3D" parent="CinematicPCamManager"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
-
 [node name="PlayerWalkPCam" type="Node3D" parent="CinematicPCamManager"]
-transform = Transform3D(-1, 4.49787e-08, -7.49644e-08, 0, 0.857493, 0.514496, 8.74228e-08, 0.514496, -0.857493, 0, 3, 0)
+transform = Transform3D(-1, 4.84934e-08, -7.27401e-08, 0, 0.83205, 0.5547, 8.74228e-08, 0.5547, -0.83205, 0, 3, 2)
 script = ExtResource("3_eciol")
-priority_override = false
+priority_override = true
 priority = 0
 follow_mode = 1
-follow_target = NodePath("../PlayerWalkPCamMarker")
+follow_target = NodePath("../PCamMarkers/PlayerWalkPCamMarker")
 follow_parameters/damping = false
 look_at_mode = 2
 look_at_target = NodePath("../../PlayerGroup/Player")
-look_at_parameters/look_at_target_offset = Vector3(0, 0, 0)
+look_at_parameters/look_at_target_offset = Vector3(0, 1, 0)
 tween_parameters = null
 tween_on_load = true
 inactive_update_mode = 0
-camera_3D_resource = null
+camera_3D_resource = SubResource("Resource_yh1dk")
 
 [node name="DiePCam" type="Node3D" parent="CinematicPCamManager"]
 transform = Transform3D(0.999991, 0, 0, 0, 0.514493, 0.857482, 0, -0.857489, 0.514489, 0, 2, 6.2)
@@ -683,13 +687,13 @@ libraries = {
 autoplay = "RESET"
 
 [node name="CinematicPlayer" parent="CinematicPCamManager" instance=ExtResource("8_4qjba")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.01476)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
 
 [node name="CinematicEnemy" parent="CinematicPCamManager" instance=ExtResource("8_3lw4j")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -8.12461)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)
 
 [node name="WalkPCamMarker" type="Marker3D" parent="CinematicPCamManager/CinematicEnemy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.11458, 0.663293, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17518, 0.899657, 0)
 
 [node name="PlayerGroup" type="Node" parent="."]
 

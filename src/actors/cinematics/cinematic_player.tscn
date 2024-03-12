@@ -2607,6 +2607,7 @@ delay_seconds = 6.0
 
 [node name="AnimationPlayer" parent="." index="3"]
 root_motion_track = NodePath("%GeneralSkeleton:mixamorig_Root")
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_qhqa4")
 }

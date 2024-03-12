@@ -5823,12 +5823,14 @@ mesh = SubResource("BoxMesh_3y8ex")
 
 [node name="AnimationPlayer" parent="." index="4"]
 root_motion_track = NodePath("%GeneralSkeleton:mixamorig_Root")
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_s60n4")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
 root_motion_track = NodePath("%GeneralSkeleton:mixamorig_Root")
+callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_s60n4")
 }
