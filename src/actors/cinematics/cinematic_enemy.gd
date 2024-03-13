@@ -18,7 +18,8 @@ func _ready() -> void:
 	)
 	GlobalSignals.fight_finished.connect(
 		func(player_win: bool) -> void:
-			state_chart.send_event("PlayerWin" if player_win else "PlayerLose")
+			print("PlayerWon" if player_win else "PlayerLose")
+			state_chart.send_event("PlayerWon" if player_win else "PlayerLose")
 	)
 
 
@@ -34,6 +35,7 @@ func _physics_process(delta: float) -> void:
 
 func _on_waiting_state_entered() -> void:
 	hide()
+	animation_player.play("T-Pose")
 
 
 func _on_waiting_state_exited() -> void:
@@ -51,6 +53,10 @@ func _on_standing_state_entered() -> void:
 
 func _on_standing_state_exited() -> void:
 	flaming_orb.hide()
+
+
+func _on_dying_state_entered() -> void:
+	animation_player.play("dying")
 
 
 func _on_transform_state_entered() -> void:

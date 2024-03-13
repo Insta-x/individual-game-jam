@@ -45,6 +45,10 @@ func _on_walking_state_entered() -> void:
 	animation_player.play("walking")
 
 
+func _on_idle_state_entered() -> void:
+	animation_player.play("idle")
+
+
 func _on_pickup_state_entered() -> void:
 	animation_player.play("pick-up")
 

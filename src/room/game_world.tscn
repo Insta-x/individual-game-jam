@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://dycl6bmv8boim"]
+[gd_scene load_steps=63 format=3 uid="uid://dycl6bmv8boim"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4837n"]
 [ext_resource type="Script" path="res://src/room/game_world.gd" id="1_p6t0b"]
@@ -63,12 +63,44 @@ duration = 0.0
 transition = 0
 ease = 2
 
+[sub_resource type="Resource" id="Resource_0tion"]
+script = ExtResource("4_50l7u")
+duration = 0.0
+transition = 0
+ease = 2
+
+[sub_resource type="Resource" id="Resource_g45aj"]
+script = ExtResource("4_bwwr5")
+cull_mask = 524287
+h_offset = 0.0
+v_offset = 0.0
+fov = 75.0
+
+[sub_resource type="Resource" id="Resource_vegx0"]
+script = ExtResource("4_50l7u")
+duration = 0.0
+transition = 0
+ease = 2
+
+[sub_resource type="Resource" id="Resource_gcym2"]
+script = ExtResource("4_bwwr5")
+cull_mask = 524287
+h_offset = 0.0
+v_offset = 0.0
+fov = 75.0
+
+[sub_resource type="Resource" id="Resource_lf30m"]
+script = ExtResource("4_50l7u")
+duration = 5.0
+transition = 0
+ease = 2
+
 [sub_resource type="Animation" id="Animation_l27e5"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../CinematicPCamManager/DiePCam:priority")
+tracks/0/path = NodePath("../CinematicPCamManager/PlayerDiePCam:priority")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -184,6 +216,66 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("../CinematicPCamManager/EnemyDiePCam:priority")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../CinematicPCamManager/PlayerPickupPCam:priority")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("../CinematicPCamManager/PlayerTransformPCam:priority")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("../CinematicPCamManager/CinematicEnemy:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("../CinematicPCamManager/CinematicEnemy:position")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -12.6)]
 }
 
 [sub_resource type="Animation" id="Animation_sjwng"]
@@ -320,7 +412,7 @@ length = 6.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../CinematicPCamManager/DiePCam:priority")
+tracks/0/path = NodePath("../CinematicPCamManager/PlayerDiePCam:priority")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -370,7 +462,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_upt1k"]
 resource_name = "player_win"
-length = 6.5
+length = 30.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -378,10 +470,10 @@ tracks/0/path = NodePath("../GUI/BlackScreenTransition:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(4, 6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": []
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -390,9 +482,12 @@ tracks/1/path = NodePath("..")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(6.5),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"win_actors_position"
+}, {
 "args": [],
 "method": &"game_reset"
 }]
@@ -400,14 +495,86 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../CinematicPCamManager/MenuPCam:priority")
+tracks/2/path = NodePath("../CinematicPCamManager/EnemyDiePCam:priority")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(6.5),
+"times": PackedFloat32Array(0, 8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [100, 0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../CinematicPCamManager/PlayerPickupPCam:priority")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(8, 19.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [100, 0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../CinematicPCamManager/PlayerTransformPCam:priority")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(19.5, 30),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [100, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../CinematicPCamManager/CinematicEnemy:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(7, 23),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../CinematicPCamManager/CinematicPlayer:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(23),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [100]
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../CinematicPCamManager/CinematicEnemy:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 23),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(0, 0, 0), Vector3(0, 3.14159, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../CinematicPCamManager/CinematicEnemy:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 23),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(0, 0, -11), Vector3(0, 0, -12.6)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pvsqw"]
@@ -565,7 +732,7 @@ height = 0.05
 radial_segments = 8
 rings = 4
 
-[node name="GameWorld" type="Node3D" node_paths=PackedStringArray("debug_displays", "player", "enemy", "cinematic_player", "cinematic_enemy", "player_start", "enemy_start", "cinematic_player_start", "cinematic_enemy_start")]
+[node name="GameWorld" type="Node3D" node_paths=PackedStringArray("debug_displays", "player", "enemy", "cinematic_player", "cinematic_enemy", "player_start", "enemy_start", "cinematic_player_start", "cinematic_enemy_start", "cinematic_player_win", "cinematic_enemy_win")]
 script = ExtResource("1_p6t0b")
 debug_displays = [null, null, null]
 player = NodePath("PlayerGroup/Player")
@@ -576,6 +743,8 @@ player_start = NodePath("PlayerStartMarker")
 enemy_start = NodePath("EnemyStartMarker")
 cinematic_player_start = NodePath("CinematicPCamManager/ActorMarkers/CinematicPlayerStart")
 cinematic_enemy_start = NodePath("CinematicPCamManager/ActorMarkers/CinematicEnemyStart")
+cinematic_player_win = NodePath("CinematicPCamManager/ActorMarkers/CinematicPlayerWon")
+cinematic_enemy_win = NodePath("CinematicPCamManager/ActorMarkers/CinematicEnemyWon")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -586,7 +755,7 @@ shadow_enabled = true
 environment = SubResource("Environment_uskuc")
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 4.84934e-08, -7.27401e-08, 0, 0.83205, 0.5547, 8.74228e-08, 0.5547, -0.83205, 0, 3, 2)
+transform = Transform3D(-4.37114e-08, 0.391272, -0.920262, 0, 0.920262, 0.391272, 1, 1.7103e-08, -4.02259e-08, -1.17518, 0.899657, -12.6)
 cull_mask = 524287
 current = true
 
@@ -596,7 +765,7 @@ script = ExtResource("1_4837n")
 [node name="CinematicPCamManager" type="Node" parent="." node_paths=PackedStringArray("entrance_pcam", "die_pcam", "anim_player")]
 script = ExtResource("3_ctpe6")
 entrance_pcam = NodePath("MenuPCam")
-die_pcam = NodePath("DiePCam")
+die_pcam = NodePath("PlayerDiePCam")
 anim_player = NodePath("CinematicAnimationPlayer")
 
 [node name="ActorMarkers" type="Node" parent="CinematicPCamManager"]
@@ -607,6 +776,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
 [node name="CinematicEnemyStart" type="Marker3D" parent="CinematicPCamManager/ActorMarkers"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)
 
+[node name="CinematicPlayerWon" type="Marker3D" parent="CinematicPCamManager/ActorMarkers"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -12.6)
+
+[node name="CinematicEnemyWon" type="Marker3D" parent="CinematicPCamManager/ActorMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+
+[node name="CinematicPlayerLose" type="Marker3D" parent="CinematicPCamManager/ActorMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
+
+[node name="CinematicEnemyLose" type="Marker3D" parent="CinematicPCamManager/ActorMarkers"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)
+
 [node name="PCamMarkers" type="Node" parent="CinematicPCamManager"]
 
 [node name="MenuPCamMarker" type="Marker3D" parent="CinematicPCamManager/PCamMarkers"]
@@ -614,6 +795,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
 
 [node name="PlayerWalkPCamMarker" type="Marker3D" parent="CinematicPCamManager/PCamMarkers"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 2)
+
+[node name="EnemyDiePCamMarker" type="Marker3D" parent="CinematicPCamManager/PCamMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.467163, 2.00828, -12.9854)
+
+[node name="PlayerPickupPCamMarker" type="Marker3D" parent="CinematicPCamManager/PCamMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.487685, 1.196, -11.9292)
+
+[node name="PlayerTransformPCamMarker" type="Marker3D" parent="CinematicPCamManager/PCamMarkers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.359357, 2.43107, -10.84)
 
 [node name="MenuPCam" type="Node3D" parent="CinematicPCamManager"]
 transform = Transform3D(1, 0, 0, 0, 0.857493, 0.514496, 0, -0.514496, 0.857493, 0, 3, 0)
@@ -632,7 +822,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_yh1dk")
 
 [node name="EnemyWalkPCam" type="Node3D" parent="CinematicPCamManager"]
-transform = Transform3D(-4.37114e-08, 0.391273, -0.920262, 0, 0.920262, 0.391273, 1, 1.71031e-08, -4.02259e-08, -1.17518, 0.899657, -12.6)
+transform = Transform3D(-4.37114e-08, 0.391272, -0.920262, 0, 0.920262, 0.391272, 1, 1.7103e-08, -4.02259e-08, -1.17518, 0.899657, -12.6)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 101
@@ -650,7 +840,7 @@ camera_3D_resource = SubResource("Resource_yh1dk")
 [node name="PlayerWalkPCam" type="Node3D" parent="CinematicPCamManager"]
 transform = Transform3D(-1, 4.84934e-08, -7.27401e-08, 0, 0.83205, 0.5547, 8.74228e-08, 0.5547, -0.83205, 0, 3, 2)
 script = ExtResource("3_eciol")
-priority_override = true
+priority_override = false
 priority = 0
 follow_mode = 1
 follow_target = NodePath("../PCamMarkers/PlayerWalkPCamMarker")
@@ -663,7 +853,55 @@ tween_on_load = true
 inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_yh1dk")
 
-[node name="DiePCam" type="Node3D" parent="CinematicPCamManager"]
+[node name="EnemyDiePCam" type="Node3D" parent="CinematicPCamManager"]
+transform = Transform3D(-0.636414, -0.655836, 0.406022, 0, 0.526382, 0.850245, -0.771346, 0.54111, -0.334996, 0.467163, 2.00828, -12.9854)
+script = ExtResource("3_eciol")
+priority_override = false
+priority = 0
+follow_mode = 1
+follow_target = NodePath("../PCamMarkers/EnemyDiePCamMarker")
+follow_parameters/damping = false
+look_at_mode = 2
+look_at_target = NodePath("../CinematicEnemy")
+look_at_parameters/look_at_target_offset = Vector3(0, 1.03, 0)
+tween_parameters = SubResource("Resource_0tion")
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = SubResource("Resource_g45aj")
+
+[node name="PlayerPickupPCam" type="Node3D" parent="CinematicPCamManager"]
+transform = Transform3D(0.7574, -0.0832255, 0.647542, 0, 0.991785, 0.127468, -0.65288, -0.0965492, 0.751208, 0.487685, 1.196, -11.9292)
+script = ExtResource("3_eciol")
+priority_override = false
+priority = 0
+follow_mode = 1
+follow_target = NodePath("../PCamMarkers/PlayerPickupPCamMarker")
+follow_parameters/damping = false
+look_at_mode = 2
+look_at_target = NodePath("../CinematicPlayer")
+look_at_parameters/look_at_target_offset = Vector3(0, 1.1, 0.105)
+tween_parameters = SubResource("Resource_vegx0")
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = SubResource("Resource_gcym2")
+
+[node name="PlayerTransformPCam" type="Node3D" parent="CinematicPCamManager"]
+transform = Transform3D(0.979728, 0.119101, -0.160729, 0, 0.803436, 0.595345, 0.200041, -0.583312, 0.787192, -0.359357, 2.43107, -10.84)
+script = ExtResource("3_eciol")
+priority_override = false
+priority = 0
+follow_mode = 1
+follow_target = NodePath("../PCamMarkers/PlayerTransformPCamMarker")
+follow_parameters/damping = false
+look_at_mode = 2
+look_at_target = NodePath("../CinematicPlayer")
+look_at_parameters/look_at_target_offset = Vector3(0, 1.1, 0)
+tween_parameters = SubResource("Resource_lf30m")
+tween_on_load = true
+inactive_update_mode = 0
+camera_3D_resource = SubResource("Resource_yh1dk")
+
+[node name="PlayerDiePCam" type="Node3D" parent="CinematicPCamManager"]
 transform = Transform3D(0.999991, 0, 0, 0, 0.514493, 0.857482, 0, -0.857489, 0.514489, 0, 2, 6.2)
 script = ExtResource("3_eciol")
 priority_override = false
@@ -687,7 +925,7 @@ libraries = {
 autoplay = "RESET"
 
 [node name="CinematicPlayer" parent="CinematicPCamManager" instance=ExtResource("8_4qjba")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 11)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)
 
 [node name="CinematicEnemy" parent="CinematicPCamManager" instance=ExtResource("8_3lw4j")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)

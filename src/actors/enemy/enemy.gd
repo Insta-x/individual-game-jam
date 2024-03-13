@@ -3,7 +3,7 @@ extends CharacterBody3D
 class_name Enemy
 
 
-const MAX_HP: int = 3
+const MAX_HP: int = 1
 
 signal dead
 
