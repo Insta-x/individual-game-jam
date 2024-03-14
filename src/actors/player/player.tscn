@@ -1,12 +1,15 @@
-[gd_scene load_steps=66 format=3 uid="uid://bapbgoptotddq"]
+[gd_scene load_steps=74 format=3 uid="uid://bapbgoptotddq"]
 
 [ext_resource type="PackedScene" uid="uid://b1dv6hjdyo3kt" path="res://assets/blend_files/player.blend" id="1_5stu6"]
 [ext_resource type="Script" path="res://src/actors/player/player.gd" id="1_aspnc"]
 [ext_resource type="PackedScene" uid="uid://cien5ag7i3qtf" path="res://assets/blend_files/low_poly_katana.blend" id="3_6y05a"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="3_b6y28"]
+[ext_resource type="Shader" uid="uid://bdcqli7hlulu3" path="res://src/shaders/flaming_orb.tres" id="4_alw15"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="4_vxgqr"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="5_dw5jx"]
+[ext_resource type="Texture2D" uid="uid://cqqptxped6nu6" path="res://assets/textures/Fire/Voronoi01.png" id="5_t4vsg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_5ffyg"]
+[ext_resource type="Texture2D" uid="uid://jgch0wv2pk00" path="res://assets/textures/Fire/Flame02.png" id="6_18cm7"]
 [ext_resource type="AudioStream" uid="uid://cqr14jxtnajnb" path="res://assets/audio/sfx/parry-sfx.wav" id="8_hoctp"]
 [ext_resource type="AudioStream" uid="uid://b1ls5c3ubmmt2" path="res://assets/audio/sfx/source-hit-sfx.wav" id="9_dhni7"]
 [ext_resource type="PackedScene" uid="uid://dwb5q6q5s2qgx" path="res://src/objects/footstep_sfx.tscn" id="10_q2i7v"]
@@ -76,6 +79,38 @@ material = SubResource("StandardMaterial3D_xs1y8")
 shape = 0
 size = 0.1
 curve = SubResource("Curve_qvvsy")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74rvc"]
+render_priority = 0
+shader = ExtResource("4_alw15")
+shader_parameter/DissolveTiling = Vector2(1, 1)
+shader_parameter/DissolveSpeed = Vector2(0, 0)
+shader_parameter/DissolveAmount = 0.0
+shader_parameter/MainTex = ExtResource("6_18cm7")
+shader_parameter/DissolveTexture = ExtResource("5_t4vsg")
+
+[sub_resource type="Curve" id="Curve_hqh2i"]
+_data = [Vector2(0, 0), 0.0, 8.62173, 0, 0, Vector2(0.176301, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.572427, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_yq1km"]
+curve = SubResource("Curve_hqh2i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_snaus"]
+emission_shape = 1
+emission_sphere_radius = 0.2
+angle_min = -360.0
+angle_max = 360.0
+gravity = Vector3(0, 2, 0)
+damping_min = 0.5
+damping_max = 1.0
+scale_min = 0.15
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_yq1km")
+color = Color(4, 1.25, 0.6, 1)
+turbulence_enabled = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_v2jd0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mrf37"]
 albedo_color = Color(1, 0, 0, 1)
@@ -5757,7 +5792,7 @@ states/jump-attack/position = Vector2(680, 132)
 transitions = ["Move", "block", SubResource("AnimationNodeStateMachineTransition_l0phv"), "block", "block-react", SubResource("AnimationNodeStateMachineTransition_ywvwp"), "block", "Move", SubResource("AnimationNodeStateMachineTransition_0q5us"), "block-react", "Move", SubResource("AnimationNodeStateMachineTransition_1hhuv"), "Move", "dying", SubResource("AnimationNodeStateMachineTransition_pattw"), "Move", "jump-attack", SubResource("AnimationNodeStateMachineTransition_p1qsi"), "jump-attack", "Move", SubResource("AnimationNodeStateMachineTransition_4muql"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_s3x0w"), "RESET", "Move", SubResource("AnimationNodeStateMachineTransition_1rrcs"), "dying", "RESET", SubResource("AnimationNodeStateMachineTransition_ryqa3")]
 graph_offset = Vector2(18, -6)
 
-[node name="Player" node_paths=PackedStringArray("animation_tree", "state_chart", "hurtbox", "hitbox_collision", "parry_particles", "parry_sfx", "hit_sfx") instance=ExtResource("1_5stu6")]
+[node name="Player" node_paths=PackedStringArray("animation_tree", "state_chart", "hurtbox", "hitbox_collision", "parry_particles", "charge_particles", "parry_sfx", "hit_sfx") instance=ExtResource("1_5stu6")]
 script = ExtResource("1_aspnc")
 turning_speed = 5.0
 walk_speed = 1.0
@@ -5767,6 +5802,7 @@ state_chart = NodePath("StateChart")
 hurtbox = NodePath("Hurtbox")
 hitbox_collision = NodePath("Hitbox/CollisionShape3D")
 parry_particles = NodePath("Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana/ParryParticles")
+charge_particles = [NodePath("Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana/ChargeParticles1"), NodePath("Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana/ChargeParticles2"), NodePath("Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana/ChargeParticles3"), NodePath("Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana/ChargeParticles4"), NodePath("Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana/ChargeParticles5")]
 parry_sfx = NodePath("ParrySFX")
 hit_sfx = NodePath("HitSFX")
 
@@ -5794,8 +5830,69 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.625)
 shape = SubResource("BoxShape3D_0mym8")
 disabled = true
 
+[node name="GeneralSkeleton" parent="Armature" index="0"]
+bones/1/position = Vector3(-1.74763e-10, 0.761263, -0.00199905)
+bones/1/rotation = Quaternion(-0.0491769, -0.437094, -0.0481635, 0.896778)
+bones/2/rotation = Quaternion(-0.0904298, 0.0258968, 0.0194227, 0.995377)
+bones/3/rotation = Quaternion(-0.0423025, 0.050446, 0.0383051, 0.997095)
+bones/4/rotation = Quaternion(0.0608628, 0.054162, 0.0328784, 0.996133)
+bones/5/rotation = Quaternion(-0.068485, 0.0951364, 0.0113984, 0.99304)
+bones/6/rotation = Quaternion(0.0548186, 0.20354, 0.0258112, 0.97719)
+bones/8/rotation = Quaternion(0.434371, 0.535554, 0.585971, -0.425607)
+bones/9/rotation = Quaternion(-0.0669422, 0.98859, 0.128678, -0.0406143)
+bones/10/rotation = Quaternion(-0.104611, -0.547705, 0.156761, 0.81517)
+bones/11/rotation = Quaternion(0.10773, 0.609797, -0.168062, 0.767005)
+bones/12/rotation = Quaternion(0.158255, 0.0767384, 0.14475, 0.973711)
+bones/13/rotation = Quaternion(-0.126136, 0.753683, 0.163395, 0.623982)
+bones/14/rotation = Quaternion(-0.0214437, -0.0994588, -0.139483, 0.984984)
+bones/15/rotation = Quaternion(0, -2.98023e-08, 2.98023e-08, 1)
+bones/16/rotation = Quaternion(0.148305, 0.125133, -0.00309603, 0.980988)
+bones/17/rotation = Quaternion(0.040304, -0.00904465, -0.0187406, 0.998971)
+bones/18/rotation = Quaternion(-0.0881353, -0.00286757, 0.036673, 0.995429)
+bones/19/rotation = Quaternion(2.98023e-08, 2.98023e-08, 2.98023e-08, 1)
+bones/20/rotation = Quaternion(0.19537, 0.109324, -0.00286926, 0.974613)
+bones/21/rotation = Quaternion(0.0147391, -0.0255834, -0.000933824, 0.999564)
+bones/22/rotation = Quaternion(-0.160977, -0.00345959, 0.0481453, 0.985777)
+bones/24/rotation = Quaternion(0.0141025, 0.0848802, 0.0781285, 0.993223)
+bones/25/rotation = Quaternion(0.0838185, -0.03945, -0.0287804, 0.995284)
+bones/26/rotation = Quaternion(-0.0482897, -0.0252039, 0.0121893, 0.998441)
+bones/27/rotation = Quaternion(-2.98023e-08, 2.98023e-08, 2.98023e-08, 1)
+bones/28/rotation = Quaternion(-0.0172618, 0.129112, 0.0956299, 0.986857)
+bones/29/rotation = Quaternion(0.196509, -0.0679435, -0.0350894, 0.977515)
+bones/30/rotation = Quaternion(-0.270787, -0.0120624, 0.0461525, 0.961457)
+bones/31/rotation = Quaternion(0, 0, 2.98023e-08, 1)
+bones/32/rotation = Quaternion(0.391774, -0.531821, -0.649974, -0.375782)
+bones/33/rotation = Quaternion(0.301901, 0.927974, 0.20908, -0.0632974)
+bones/34/rotation = Quaternion(0.0181894, 0.501522, -0.26136, 0.824522)
+bones/35/rotation = Quaternion(0.181137, -0.704757, -0.0534466, 0.683849)
+bones/36/rotation = Quaternion(0.315655, -0.0306759, -0.398654, 0.860521)
+bones/37/rotation = Quaternion(-0.136972, -0.728538, -0.148193, 0.654607)
+bones/38/rotation = Quaternion(0.0266624, 0.209711, 0.0927508, 0.972989)
+bones/39/rotation = Quaternion(-4.47035e-08, 4.47035e-08, 2.98023e-08, 1)
+bones/40/rotation = Quaternion(-0.0886616, -0.0356965, -0.166114, 0.981464)
+bones/41/rotation = Quaternion(-0.475909, 0.0945441, -0.18844, 0.853852)
+bones/42/rotation = Quaternion(-0.467591, 0.0821966, -0.184292, 0.860604)
+bones/44/rotation = Quaternion(-0.171615, -0.131311, -0.164324, 0.962447)
+bones/45/rotation = Quaternion(-0.398231, 0.0403627, -0.0696162, 0.913749)
+bones/46/rotation = Quaternion(-0.262492, 0.023435, -0.0569619, 0.962966)
+bones/47/rotation = Quaternion(0, -1.49012e-08, -1.49012e-08, 1)
+bones/48/rotation = Quaternion(-0.313209, -0.167355, -0.188213, 0.915679)
+bones/49/rotation = Quaternion(-0.18096, 0.0324995, -0.0153737, 0.982833)
+bones/50/rotation = Quaternion(-0.266751, 0.0239005, -0.0567919, 0.961794)
+bones/52/rotation = Quaternion(-0.0252621, -0.0702935, 0.0725578, 0.994563)
+bones/53/rotation = Quaternion(-0.182337, 0.0955878, -0.0838785, 0.974977)
+bones/54/rotation = Quaternion(-0.401728, 0.0176134, -0.129554, 0.906378)
+bones/56/rotation = Quaternion(0.357615, -0.403544, 0.836463, 0.0979432)
+bones/57/rotation = Quaternion(-0.0346496, 0.923632, 0.365318, -0.110666)
+bones/58/rotation = Quaternion(0.0176042, 0.696634, -0.717201, 0.00368214)
+bones/59/rotation = Quaternion(0.0532475, 0.99857, -0.00432166, 0.00180566)
+bones/61/rotation = Quaternion(-0.0425912, -0.271984, 0.954526, -0.114412)
+bones/62/rotation = Quaternion(-0.0456917, 0.911258, 0.408666, -0.0226558)
+bones/63/rotation = Quaternion(-0.0572528, 0.833052, -0.537271, 0.118686)
+bones/64/rotation = Quaternion(-0.0254368, 0.999548, 0.00850747, 0.013598)
+
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, 0.467014, 0.966261, -0.0228885)
+transform = Transform3D(-0.27882, -0.94677, -0.160895, -0.370883, 0.260698, -0.891338, 0.885836, -0.188849, -0.423828, 0.353688, 0.76698, 0.102182)
 bone_name = "RightHand"
 bone_idx = 35
 
@@ -5816,8 +5913,52 @@ trail_lifetime = 0.1
 process_material = SubResource("ParticleProcessMaterial_781vu")
 draw_pass_1 = SubResource("RibbonTrailMesh_hdnau")
 
+[node name="ChargeParticles1" type="GPUParticles3D" parent="Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana" index="2"]
+transform = Transform3D(1, -5.96046e-08, 1.17347e-07, 5.96046e-08, 1, -1.11759e-08, 2.6077e-08, -4.09782e-08, 1, 0.976093, 3.3043, 0.305934)
+visible = false
+material_override = SubResource("ShaderMaterial_74rvc")
+amount = 4
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_snaus")
+draw_pass_1 = SubResource("QuadMesh_v2jd0")
+
+[node name="ChargeParticles2" type="GPUParticles3D" parent="Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana" index="3"]
+transform = Transform3D(1, -1.49012e-07, 5.58794e-07, 3.27826e-07, 1, -5.96046e-08, 2.30968e-07, -1.93715e-07, 1, 0.977161, 9.02958, 0.45581)
+visible = false
+material_override = SubResource("ShaderMaterial_74rvc")
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_snaus")
+draw_pass_1 = SubResource("QuadMesh_v2jd0")
+
+[node name="ChargeParticles3" type="GPUParticles3D" parent="Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana" index="4"]
+transform = Transform3D(1, -5.96046e-08, 3.40864e-07, 1.78814e-07, 1, -3.72529e-08, 1.24797e-07, -1.22935e-07, 1, 0.575523, 17.1694, -0.37199)
+visible = false
+material_override = SubResource("ShaderMaterial_74rvc")
+amount = 12
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_snaus")
+draw_pass_1 = SubResource("QuadMesh_v2jd0")
+
+[node name="ChargeParticles4" type="GPUParticles3D" parent="Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana" index="5"]
+transform = Transform3D(1, -1.19209e-07, 4.33996e-07, 2.38419e-07, 1, -4.84288e-08, 1.91852e-07, -1.63913e-07, 1, 0.458138, 24.1159, -1.43897)
+visible = false
+material_override = SubResource("ShaderMaterial_74rvc")
+amount = 16
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_snaus")
+draw_pass_1 = SubResource("QuadMesh_v2jd0")
+
+[node name="ChargeParticles5" type="GPUParticles3D" parent="Armature/GeneralSkeleton/BoneAttachment3D/low_poly_katana" index="6"]
+transform = Transform3D(1, -5.96046e-08, 3.40864e-07, 1.78814e-07, 1, -3.72529e-08, 1.24797e-07, -1.22935e-07, 1, -1.98612, 32.3564, -4.48)
+visible = false
+material_override = SubResource("ShaderMaterial_74rvc")
+amount = 20
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_snaus")
+draw_pass_1 = SubResource("QuadMesh_v2jd0")
+
 [node name="LeftFootBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, -0.18862, 0.0679521, 0.0312214)
+transform = Transform3D(-0.9384, -0.34555, -1.58884e-06, -1.12626e-06, -1.71922e-06, 1, -0.34555, 0.9384, 1.12131e-06, -0.14047, 0.0679488, -0.339807)
 bone_name = "LeftFoot"
 bone_idx = 58
 
@@ -5826,7 +5967,7 @@ layers = 524288
 mesh = SubResource("SphereMesh_knshh")
 
 [node name="RightFootBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="3"]
-transform = Transform3D(-1, 0, 0, 0, 0, 1, 0, 1, 0, 0.188618, 0.0679566, 0.0341933)
+transform = Transform3D(-0.507816, -0.861307, -0.0165597, 1.05985e-05, -0.0192288, 0.999815, -0.861466, 0.507721, 0.0097739, 0.141193, 0.0690059, 0.292631)
 bone_name = "RightFoot"
 bone_idx = 63
 
@@ -5835,7 +5976,7 @@ layers = 524288
 mesh = SubResource("SphereMesh_knshh")
 
 [node name="SpineBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.56335e-10, 0.955986, 0.00636373)
+transform = Transform3D(0.659279, 0.240069, -0.712544, -0.0168187, 0.952131, 0.305229, 0.751711, -0.189247, 0.631757, 0.00311446, 0.83609, -0.000303754)
 bone_name = "Spine"
 bone_idx = 2
 
@@ -5844,7 +5985,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_27t5b")
 
 [node name="HeadBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.112e-09, 1.31533, 0.0241584)
+transform = Transform3D(0.995652, 0.0924902, 0.011114, -0.0918266, 0.954355, 0.284209, 0.01568, -0.283994, 0.958698, 0.0563361, 1.1782, -0.0869016)
 bone_name = "Head"
 bone_idx = 6
 
@@ -5853,7 +5994,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_e87hj")
 
 [node name="LeftLegBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="6"]
-transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, -0.12493, 0.458717, 0.00420403)
+transform = Transform3D(0.927493, -0.00790853, 0.373758, -0.0201202, -0.999383, 0.0287827, 0.373299, -0.0342158, -0.92708, -0.0682091, 0.457969, -0.327708)
 bone_name = "LeftLowerLeg"
 bone_idx = 57
 
@@ -5862,7 +6003,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_3y8ex")
 
 [node name="RightLegBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="7"]
-transform = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, -1, 0.12493, 0.458717, 0.00446483)
+transform = Transform3D(0.458201, -0.230609, 0.858412, 0.258587, -0.8894, -0.376962, 0.850403, 0.394699, -0.347892, 0.227643, 0.388873, 0.0738955)
 bone_name = "RightLowerLeg"
 bone_idx = 62
 
@@ -5871,7 +6012,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_3y8ex")
 
 [node name="LeftHandBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="8"]
-transform = Transform3D(0, 1, 0, 0, 0, -1, -1, 0, 0, -0.467014, 0.966261, -0.0226631)
+transform = Transform3D(0.608568, 0.769321, 0.194399, -0.0286863, 0.266159, -0.963502, -0.792983, 0.58078, 0.184045, -0.160497, 0.721295, -0.314865)
 bone_name = "LeftHand"
 bone_idx = 11
 
@@ -5881,7 +6022,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_3y8ex")
 
 [node name="RightHandBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="9"]
-transform = Transform3D(0, -1, 0, 0, 0, -1, 1, 0, 0, 0.467014, 0.966261, -0.0228885)
+transform = Transform3D(-0.27882, -0.94677, -0.160895, -0.370883, 0.260698, -0.891338, 0.885836, -0.188849, -0.423828, 0.353688, 0.76698, 0.102182)
 bone_name = "RightHand"
 bone_idx = 35
 

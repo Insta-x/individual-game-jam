@@ -20,6 +20,7 @@ signal dead
 @export var hurtbox: Area3D
 @export var hitbox_collision: CollisionShape3D
 @export var parry_particles: GPUParticles3D
+@export var charge_particles: Array[GPUParticles3D]
 @export_subgroup("Audio")
 @export var parry_sfx: AudioStreamPlayer3D
 @export var hit_sfx: AudioStreamPlayer3D
@@ -31,7 +32,14 @@ signal dead
 var input_vector := Vector2.ZERO
 var locomotion_vector := Vector2.ZERO
 
-var attack_charge := 0
+var attack_charge := 0 :
+	set(value):
+		attack_charge = value
+		for i in range(charge_particles.size()):
+			if i < attack_charge:
+				charge_particles[i].show()
+			else:
+				charge_particles[i].hide()
 
 
 func _ready() -> void:

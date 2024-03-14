@@ -40,6 +40,10 @@ folder_colors={
 
 import/fbx/enabled=false
 
+[gui]
+
+theme/custom_font="res://assets/fonts/RyujinAttack/RyujinAttack-gxApE.ttf"
+
 [input]
 
 move_forward={
