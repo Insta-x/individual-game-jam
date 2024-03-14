@@ -9081,7 +9081,7 @@ bones/63/rotation = Quaternion(-0.0560919, 0.824783, -0.550171, 0.117889)
 bones/64/rotation = Quaternion(-0.0255641, 0.999542, 0.00896759, 0.0135191)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(-0.31673, -0.934021, -0.165191, -0.322244, 0.269759, -0.907408, 0.8921, -0.234171, -0.386423, 0.602334, 1.16619, 0.114282)
+transform = Transform3D(-0.31673, -0.93402, -0.165191, -0.322242, 0.269758, -0.907409, 0.8921, -0.234172, -0.386422, 0.602334, 1.1662, 0.114282)
 bone_name = "RightHand"
 bone_idx = 35
 
@@ -9103,7 +9103,7 @@ process_material = SubResource("ParticleProcessMaterial_xeiy8")
 draw_pass_1 = SubResource("RibbonTrailMesh_hxbb4")
 
 [node name="LeftFootBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(-0.9384, -0.34555, -1.09989e-06, -7.77771e-07, -1.03191e-06, 1, -0.34555, 0.9384, 6.59376e-07, -0.166914, 0.0901769, -0.508943)
+transform = Transform3D(-0.9384, -0.345551, -1.64844e-06, -6.47618e-07, -3.30061e-06, 1, -0.34555, 0.9384, 2.64496e-06, -0.166914, 0.0901816, -0.508944)
 bone_name = "LeftFoot"
 bone_idx = 58
 
@@ -9112,7 +9112,7 @@ layers = 524288
 mesh = SubResource("SphereMesh_m5b46")
 
 [node name="RightFootBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="3"]
-transform = Transform3D(-0.507253, -0.861596, -0.0186321, 1.23382e-05, -0.0216273, 0.999766, -0.861797, 0.507134, 0.010981, 0.257957, 0.0481261, 0.374109)
+transform = Transform3D(-0.507253, -0.861596, -0.018632, 1.17645e-05, -0.0216269, 0.999766, -0.861798, 0.507134, 0.0109805, 0.257957, 0.0481306, 0.37411)
 bone_name = "RightFoot"
 bone_idx = 63
 
@@ -9121,7 +9121,7 @@ layers = 524288
 mesh = SubResource("SphereMesh_m5b46")
 
 [node name="SpineBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="4"]
-transform = Transform3D(0.646202, 0.240008, -0.724444, -0.0149599, 0.953062, 0.302406, 0.76302, -0.184578, 0.619461, 0.024284, 1.13747, -0.00733348)
+transform = Transform3D(0.646202, 0.240008, -0.724444, -0.0149599, 0.953062, 0.302406, 0.76302, -0.184578, 0.619461, 0.024284, 1.13748, -0.00733346)
 bone_name = "Spine"
 bone_idx = 2
 
@@ -9130,7 +9130,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_vxpcl")
 
 [node name="HeadBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="5"]
-transform = Transform3D(0.996039, 0.088267, 0.0107794, -0.0875219, 0.951684, 0.294342, 0.0157221, -0.29412, 0.955639, 0.119798, 1.74964, -0.156349)
+transform = Transform3D(0.996038, 0.0882669, 0.0107791, -0.0875217, 0.951684, 0.294342, 0.0157222, -0.29412, 0.955639, 0.119798, 1.74965, -0.156349)
 bone_name = "Head"
 bone_idx = 6
 
@@ -9139,7 +9139,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_w7svp")
 
 [node name="LeftLegBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="6"]
-transform = Transform3D(0.924877, -0.00956163, 0.380146, -0.0269252, -0.998821, 0.0403849, 0.379311, -0.0475864, -0.924045, -0.104687, 0.489293, -0.452396)
+transform = Transform3D(0.924877, -0.00956134, 0.380146, -0.0269253, -0.998821, 0.0403859, 0.379312, -0.0475875, -0.924044, -0.104687, 0.489298, -0.452396)
 bone_name = "LeftLowerLeg"
 bone_idx = 57
 
@@ -9148,7 +9148,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_rpdx7")
 
 [node name="RightLegBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="7"]
-transform = Transform3D(0.453145, -0.205186, 0.867501, 0.25531, -0.902511, -0.34683, 0.854094, 0.378646, -0.356582, 0.297188, 0.398368, 0.168686)
+transform = Transform3D(0.453145, -0.205186, 0.867501, 0.255311, -0.902511, -0.34683, 0.854094, 0.378646, -0.356581, 0.297188, 0.398372, 0.168686)
 bone_name = "RightLowerLeg"
 bone_idx = 62
 
@@ -9157,7 +9157,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_rpdx7")
 
 [node name="LeftHandBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="8"]
-transform = Transform3D(0.609073, 0.775254, 0.167368, -0.0642439, 0.258558, -0.963857, -0.790508, 0.576307, 0.207286, -0.216668, 1.07558, -0.500671)
+transform = Transform3D(0.609071, 0.775254, 0.16737, -0.0642435, 0.25856, -0.963857, -0.79051, 0.576305, 0.207286, -0.216667, 1.07558, -0.500671)
 bone_name = "LeftHand"
 bone_idx = 11
 
@@ -9167,7 +9167,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_rpdx7")
 
 [node name="RightHandBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="9"]
-transform = Transform3D(-0.31673, -0.934021, -0.165191, -0.322244, 0.269759, -0.907408, 0.8921, -0.234171, -0.386423, 0.602334, 1.16619, 0.114282)
+transform = Transform3D(-0.31673, -0.93402, -0.165191, -0.322242, 0.269758, -0.907409, 0.8921, -0.234172, -0.386422, 0.602334, 1.1662, 0.114282)
 bone_name = "RightHand"
 bone_idx = 35
 

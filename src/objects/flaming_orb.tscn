@@ -148,6 +148,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.093211, 0)
 material_override = SubResource("ShaderMaterial_un7n2")
 amount = 1
 lifetime = 5.0
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_wpw0y")
 draw_pass_1 = SubResource("QuadMesh_ryst7")
 
@@ -159,7 +160,6 @@ process_material = SubResource("ParticleProcessMaterial_gpuql")
 draw_pass_1 = SubResource("QuadMesh_m7v6c")
 
 [node name="SmokeParticles" type="GPUParticles3D" parent="." index="4"]
-sorting_offset = -1.0
 material_override = SubResource("ShaderMaterial_e5xsc")
 amount = 40
 lifetime = 2.5

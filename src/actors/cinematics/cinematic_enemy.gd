@@ -4,7 +4,6 @@ extends CharacterBody3D
 @export_group("Internal Node Dependencies")
 @export var state_chart: StateChart
 @export var animation_player: AnimationPlayer
-@export var flaming_orb: Node3D
 
 
 func _ready() -> void:
@@ -34,12 +33,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_waiting_state_entered() -> void:
-	hide()
 	animation_player.play("T-Pose")
 
 
 func _on_waiting_state_exited() -> void:
-	show()
+	pass
 
 
 func _on_walking_state_entered() -> void:
@@ -48,11 +46,10 @@ func _on_walking_state_entered() -> void:
 
 func _on_standing_state_entered() -> void:
 	animation_player.play("idle")
-	flaming_orb.show()
 
 
 func _on_standing_state_exited() -> void:
-	flaming_orb.hide()
+	pass
 
 
 func _on_dying_state_entered() -> void:
