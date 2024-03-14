@@ -30,3 +30,9 @@ Flaming Orb: https://sketchfab.com/3d-models/flaming-orb-d7f8cda1e8ae4e458cd674b
 
 Flame Textures: https://www.patreon.com/posts/godot-vfx-fire-90253805
 by Gabriel Aguiar Prod.
+
+Rain Ambience: https://freesound.org/people/visionear/sounds/573334/
+by visionear is licensed under Creative Commons 0 (https://creativecommons.org/publicdomain/zero/1.0/).
+
+Footsteps: https://freesound.org/people/duckduckpony/sounds/204014/
+by duckduckpony is licensed under Creative Commons Attribution 4.0 (https://creativecommons.org/licenses/by/4.0/).

@@ -1,0 +1,14 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwb5q6q5s2qgx"]
+
+[ext_resource type="AudioStream" uid="uid://bqlm0rpj6u4sl" path="res://assets/audio/sfx/step-1.wav" id="1_57b32"]
+[ext_resource type="Script" path="res://src/objects/footstep_sfx.gd" id="1_qffwp"]
+[ext_resource type="AudioStream" uid="uid://b3v8c1w1p0ixu" path="res://assets/audio/sfx/step-2.wav" id="3_yawtu"]
+[ext_resource type="AudioStream" uid="uid://fidisw5xle6r" path="res://assets/audio/sfx/step-6.wav" id="4_kpkm0"]
+[ext_resource type="AudioStream" uid="uid://vgh0xn465t0p" path="res://assets/audio/sfx/step-7.wav" id="5_hfngv"]
+
+[node name="FootstepSFX" type="AudioStreamPlayer3D"]
+stream = ExtResource("1_57b32")
+max_db = -1.0
+pitch_scale = 0.6
+script = ExtResource("1_qffwp")
+possible_step_sounds = Array[AudioStream]([ExtResource("1_57b32"), ExtResource("3_yawtu"), ExtResource("4_kpkm0"), ExtResource("5_hfngv")])

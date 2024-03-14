@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://dycl6bmv8boim"]
+[gd_scene load_steps=64 format=3 uid="uid://dycl6bmv8boim"]
 
 [ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="1_4837n"]
 [ext_resource type="Script" path="res://src/room/game_world.gd" id="1_p6t0b"]
@@ -18,6 +18,7 @@
 [ext_resource type="Shader" path="res://src/shaders/top_cloud.gdshader" id="14_v43i1"]
 [ext_resource type="Shader" path="res://src/shaders/bottom_cloud.gdshader" id="15_umuui"]
 [ext_resource type="PackedScene" uid="uid://dvyjm7y0yr446" path="res://src/UI/main_menu.tscn" id="16_1n8qy"]
+[ext_resource type="AudioStream" uid="uid://b88g23uyfsuk5" path="res://assets/audio/rain_ambience.wav" id="19_vjwvv"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_kbpjf"]
 sky_top_color = Color(0.215686, 0.243137, 0.309804, 1)
@@ -755,12 +756,15 @@ shadow_enabled = true
 environment = SubResource("Environment_uskuc")
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0.391272, -0.920262, 0, 0.920262, 0.391272, 1, 1.7103e-08, -4.02259e-08, -1.17518, 0.899657, -12.6)
+transform = Transform3D(-4.37114e-08, 0.391272, -0.920262, 0, 0.920262, 0.391272, 1, 1.71031e-08, -4.02259e-08, -1.17518, 0.899657, -12.6)
 cull_mask = 524287
 current = true
 
 [node name="PhantomCameraHost" type="Node" parent="MainCamera3D"]
 script = ExtResource("1_4837n")
+
+[node name="AudioListener3D" type="AudioListener3D" parent="MainCamera3D"]
+current = true
 
 [node name="CinematicPCamManager" type="Node" parent="." node_paths=PackedStringArray("entrance_pcam", "die_pcam", "anim_player")]
 script = ExtResource("3_ctpe6")
@@ -822,7 +826,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_yh1dk")
 
 [node name="EnemyWalkPCam" type="Node3D" parent="CinematicPCamManager"]
-transform = Transform3D(-4.37114e-08, 0.391272, -0.920262, 0, 0.920262, 0.391272, 1, 1.7103e-08, -4.02259e-08, -1.17518, 0.899657, -12.6)
+transform = Transform3D(-4.37114e-08, 0.391272, -0.920262, 0, 0.920262, 0.391272, 1, 1.71031e-08, -4.02259e-08, -1.17518, 0.899657, -12.6)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 101
@@ -854,7 +858,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_yh1dk")
 
 [node name="EnemyDiePCam" type="Node3D" parent="CinematicPCamManager"]
-transform = Transform3D(-0.636414, -0.655836, 0.406022, 0, 0.526382, 0.850245, -0.771346, 0.54111, -0.334996, 0.467163, 2.00828, -12.9854)
+transform = Transform3D(-0.636373, -0.655873, 0.406027, 0, 0.526365, 0.850255, -0.77138, 0.541082, -0.334964, 0.467163, 2.00828, -12.9854)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 0
@@ -870,7 +874,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_g45aj")
 
 [node name="PlayerPickupPCam" type="Node3D" parent="CinematicPCamManager"]
-transform = Transform3D(0.7574, -0.0832255, 0.647542, 0, 0.991785, 0.127468, -0.65288, -0.0965492, 0.751208, 0.487685, 1.196, -11.9292)
+transform = Transform3D(0.757424, -0.0832185, 0.647515, 0, 0.991786, 0.127462, -0.652852, -0.0965481, 0.751232, 0.487685, 1.196, -11.9292)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 0
@@ -886,7 +890,7 @@ inactive_update_mode = 0
 camera_3D_resource = SubResource("Resource_gcym2")
 
 [node name="PlayerTransformPCam" type="Node3D" parent="CinematicPCamManager"]
-transform = Transform3D(0.979728, 0.119101, -0.160729, 0, 0.803436, 0.595345, 0.200041, -0.583312, 0.787192, -0.359357, 2.43107, -10.84)
+transform = Transform3D(0.979728, 0.119101, -0.160728, 0, 0.803436, 0.595343, 0.200041, -0.583312, 0.787189, -0.359357, 2.43107, -10.84)
 script = ExtResource("3_eciol")
 priority_override = false
 priority = 0
@@ -928,7 +932,7 @@ autoplay = "RESET"
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)
 
 [node name="CinematicEnemy" parent="CinematicPCamManager" instance=ExtResource("8_3lw4j")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, -12.6)
 
 [node name="WalkPCamMarker" type="Marker3D" parent="CinematicPCamManager/CinematicEnemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.17518, 0.899657, 0)
@@ -1049,7 +1053,7 @@ mesh = SubResource("PlaneMesh_pmsbt")
 
 [node name="RainParticles" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.999523, 0.0308874, 0, -0.0308874, 0.999523, 0, 10, 0)
-amount = 100
+amount = 150
 sub_emitter = NodePath("DropWaterParticles")
 lifetime = 0.6
 randomness = 0.4
@@ -1084,3 +1088,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="RainAmbienceAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_vjwvv")
+autoplay = true
