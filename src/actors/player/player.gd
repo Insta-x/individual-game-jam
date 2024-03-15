@@ -38,8 +38,8 @@ var attack_charge := 0 :
 		for i in range(charge_particles.size()):
 			if i < attack_charge:
 				charge_particles[i].show()
-			else:
-				charge_particles[i].hide()
+		if attack_charge >= ATTACK_CHARGE_NEEDED:
+			GlobalSignals.player_charged.emit()
 
 
 func _ready() -> void:
@@ -182,6 +182,7 @@ func die() -> void:
 func on_fight_start() -> void:
 	set_pcam_rotation()
 	state_chart.send_event("FightStarted")
+	attack_charge = 0
 
 
 func on_fight_finished(player_win: bool) -> void:
