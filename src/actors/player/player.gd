@@ -41,6 +41,8 @@ var attack_charge := 0 :
 		if attack_charge >= ATTACK_CHARGE_NEEDED:
 			GlobalSignals.player_charged.emit()
 
+@onready var cheat: Cheat = $Cheat
+
 
 func _ready() -> void:
 	GlobalSignals.fight_start.connect(on_fight_start)
@@ -148,7 +150,8 @@ func _on_blocking_state_exited() -> void:
 #region Attacking State
 func _on_attacking_state_entered() -> void:
 	animation_tree_travel("jump-attack")
-	attack_charge = 0
+	if not cheat.is_cheat_activated:
+		attack_charge = 0
 
 
 func _on_attacking_state_physics_processing(delta: float) -> void:
@@ -183,6 +186,7 @@ func on_fight_start() -> void:
 	set_pcam_rotation()
 	state_chart.send_event("FightStarted")
 	attack_charge = 0
+	cheat.is_cheat_activated = false
 
 
 func on_fight_finished(player_win: bool) -> void:
@@ -193,3 +197,12 @@ func on_fight_finished(player_win: bool) -> void:
 func _on_not_blocking_hurtbox_area_entered(area: Area3D) -> void:
 	hit_sfx.play()
 	die()
+
+
+func _on_cheat_cheat_activated() -> void:
+	attack_charge = ATTACK_CHARGE_NEEDED
+	print("cheat_activated")
+
+
+func _on_cheat_cheat_deactivated() -> void:
+	print("cheat_deactivated")

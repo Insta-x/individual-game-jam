@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://bapbgoptotddq"]
+[gd_scene load_steps=75 format=3 uid="uid://bapbgoptotddq"]
 
 [ext_resource type="PackedScene" uid="uid://b1dv6hjdyo3kt" path="res://assets/blend_files/player.blend" id="1_5stu6"]
 [ext_resource type="Script" path="res://src/actors/player/player.gd" id="1_aspnc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cqqptxped6nu6" path="res://assets/textures/Fire/Voronoi01.png" id="5_t4vsg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="6_5ffyg"]
 [ext_resource type="Texture2D" uid="uid://jgch0wv2pk00" path="res://assets/textures/Fire/Flame02.png" id="6_18cm7"]
+[ext_resource type="Script" path="res://src/actors/player/cheat.gd" id="7_38ajb"]
 [ext_resource type="AudioStream" uid="uid://cqr14jxtnajnb" path="res://assets/audio/sfx/parry-sfx.wav" id="8_hoctp"]
 [ext_resource type="AudioStream" uid="uid://b1ls5c3ubmmt2" path="res://assets/audio/sfx/source-hit-sfx.wav" id="9_dhni7"]
 [ext_resource type="PackedScene" uid="uid://dwb5q6q5s2qgx" path="res://src/objects/footstep_sfx.tscn" id="10_q2i7v"]
@@ -6090,24 +6091,27 @@ transform = Transform3D(0.931436, 0.21993, -0.289926, -0.35465, 0.72714, -0.5877
 layers = 524288
 mesh = SubResource("BoxMesh_3y8ex")
 
-[node name="AnimationPlayer" parent="." index="4"]
+[node name="Cheat" type="Node" parent="." index="4"]
+script = ExtResource("7_38ajb")
+
+[node name="AnimationPlayer" parent="." index="5"]
 root_motion_track = NodePath("%GeneralSkeleton:mixamorig_Root")
 callback_mode_process = 0
 libraries = {
 "": SubResource("AnimationLibrary_s60n4")
 }
 
-[node name="AnimationTree" type="AnimationTree" parent="." index="5"]
+[node name="AnimationTree" type="AnimationTree" parent="." index="6"]
 root_motion_track = NodePath("%GeneralSkeleton:mixamorig_Root")
 callback_mode_process = 0
 tree_root = SubResource("AnimationNodeStateMachine_tmlpr")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Move/blend_position = Vector2(0, 0)
 
-[node name="RootMotionView" type="RootMotionView" parent="." index="6"]
+[node name="RootMotionView" type="RootMotionView" parent="." index="7"]
 animation_path = NodePath("../AnimationTree")
 
-[node name="StateChart" type="Node" parent="." index="7"]
+[node name="StateChart" type="Node" parent="." index="8"]
 script = ExtResource("3_b6y28")
 
 [node name="CompoundState" type="Node" parent="StateChart" index="0"]
@@ -6174,17 +6178,19 @@ script = ExtResource("6_5ffyg")
 to = NodePath("../../Idle")
 delay_seconds = 7.0
 
-[node name="ParrySFX" type="AudioStreamPlayer3D" parent="." index="8"]
+[node name="ParrySFX" type="AudioStreamPlayer3D" parent="." index="9"]
 stream = ExtResource("8_hoctp")
 pitch_scale = 0.5
 
-[node name="HitSFX" type="AudioStreamPlayer3D" parent="." index="9"]
+[node name="HitSFX" type="AudioStreamPlayer3D" parent="." index="10"]
 stream = ExtResource("9_dhni7")
 pitch_scale = 0.8
 
-[node name="FootstepSFX" parent="." index="10" instance=ExtResource("10_q2i7v")]
+[node name="FootstepSFX" parent="." index="11" instance=ExtResource("10_q2i7v")]
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_not_blocking_hurtbox_area_entered"]
+[connection signal="cheat_activated" from="Cheat" to="." method="_on_cheat_cheat_activated"]
+[connection signal="cheat_deactivated" from="Cheat" to="." method="_on_cheat_cheat_deactivated"]
 [connection signal="state_entered" from="StateChart/CompoundState/Idle" to="." method="_on_idle_state_entered"]
 [connection signal="state_entered" from="StateChart/CompoundState/FightingStates/Moving" to="." method="_on_moving_state_entered"]
 [connection signal="state_physics_processing" from="StateChart/CompoundState/FightingStates/Moving" to="." method="_on_moving_state_physics_processing"]
