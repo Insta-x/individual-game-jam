@@ -662,10 +662,10 @@ tracks/2/path = NodePath("../GUI/BlackScreenTransition:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(4, 6),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 4, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -702,10 +702,10 @@ tracks/0/path = NodePath("../GUI/BlackScreenTransition:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": []
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -853,7 +853,7 @@ shadow_enabled = true
 environment = SubResource("Environment_uskuc")
 
 [node name="MainCamera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.820889, -0.392647, 0.414683, 0, 0.726135, 0.687541, -0.571084, 0.564399, -0.596074, 0.807, 2.003, -12.16)
+transform = Transform3D(-4.37114e-08, -0.391272, 0.920262, 0, 0.920262, 0.391272, -1, 1.71031e-08, -4.02259e-08, 1.17518, 0.899657, -11)
 cull_mask = 524287
 current = true
 
@@ -1021,36 +1021,6 @@ camera_3D_resource = ExtResource("5_qr7t6")
 [node name="CinematicPlayer" parent="CinematicPCamManager" instance=ExtResource("8_4qjba")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -12.6)
 
-[node name="BoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(0.425185, -0.679146, 0.598313, -0.749602, -0.634701, -0.187753, 0.507262, -0.368667, -0.778955, 0.394435, 1.08427, 0.0142964)
-
-[node name="FlamingOrbBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(0.981939, 0.183396, -0.0465008, 0.0139003, -0.315043, -0.948976, -0.188688, 0.93119, -0.311902, 0.0261954, 0.769318, -0.397466)
-
-[node name="LeftFootBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="3"]
-transform = Transform3D(-0.707877, -0.70632, -0.0048423, -0.00694941, 0.000109285, 0.999976, -0.706302, 0.707893, -0.00498588, -0.132942, 0.0964289, -0.231073)
-
-[node name="RightFootBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="4"]
-transform = Transform3D(-0.329423, -0.944179, 0.00253186, 0.00709274, 0.000206798, 0.999975, -0.944155, 0.329433, 0.00662861, 0.0692548, 0.126638, 0.291902)
-
-[node name="SpineBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="5"]
-transform = Transform3D(0.534531, 0.198348, -0.821544, -0.0228352, 0.975105, 0.220565, 0.84484, -0.0991387, 0.525753, -0.00342631, 0.871958, -0.00269862)
-
-[node name="HeadBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="6"]
-transform = Transform3D(0.986541, 0.152137, -0.0599188, -0.144473, 0.98265, 0.116307, 0.0765736, -0.106085, 0.991404, 0.0698278, 1.21372, -0.0856236)
-
-[node name="LeftLegBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="7"]
-transform = Transform3D(0.767524, -0.165767, 0.619216, 0.0330267, -0.954476, -0.296455, 0.640169, 0.247987, -0.727108, -0.00255261, 0.463499, -0.30685)
-
-[node name="RightLegBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="8"]
-transform = Transform3D(0.238037, -0.393603, 0.887927, 0.254985, -0.856813, -0.448167, 0.937188, 0.333088, -0.103591, 0.234296, 0.431884, 0.0989762)
-
-[node name="LeftHandBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="9"]
-transform = Transform3D(0.981939, 0.183396, -0.0465008, 0.0139003, -0.315043, -0.948976, -0.188688, 0.93119, -0.311902, 0.0261954, 0.769318, -0.397466)
-
-[node name="RightHandBoneAttachment3D" parent="CinematicPCamManager/CinematicPlayer/Armature/GeneralSkeleton" index="10"]
-transform = Transform3D(0.425185, -0.679146, 0.598313, -0.749602, -0.634701, -0.187753, 0.507262, -0.368667, -0.778955, 0.394435, 1.08427, 0.0142964)
-
 [node name="CinematicEnemy" parent="CinematicPCamManager" instance=ExtResource("8_3lw4j")]
 transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, -12.6)
 
@@ -1064,50 +1034,29 @@ bones/5/rotation = Quaternion(0.0375603, -0.011099, -0.0021804, 0.99923)
 bones/6/rotation = Quaternion(0.054469, 0.176923, 0.0129706, 0.982631)
 bones/8/rotation = Quaternion(0.493204, 0.518796, 0.486763, -0.500662)
 bones/9/rotation = Quaternion(0.112996, 0.874195, 0.415371, -0.224683)
-bones/10/rotation = Quaternion(0.440306, -0.465807, 0.147481, 0.753263)
-bones/11/rotation = Quaternion(-0.60563, 0.780253, -0.0498554, 0.148094)
 bones/12/rotation = Quaternion(-0.00574104, -0.0192584, 0.0352972, 0.999175)
 bones/13/rotation = Quaternion(-0.103958, 0.779009, 0.262446, 0.559875)
-bones/14/rotation = Quaternion(-0.0413671, 0.0619856, -0.0694301, 0.994799)
-bones/15/rotation = Quaternion(0, 2.98023e-08, -2.98023e-08, 1)
 bones/16/rotation = Quaternion(0.116115, 0.135623, 0.0272486, 0.983555)
 bones/17/rotation = Quaternion(-0.0585645, -0.039277, 0.00863048, 0.997473)
-bones/18/rotation = Quaternion(0.0904397, -0.0104393, -0.0434864, 0.994897)
-bones/19/rotation = Quaternion(0, 0, 0, 1)
 bones/20/rotation = Quaternion(0.0531243, 0.0577394, 0.025565, 0.996589)
 bones/21/rotation = Quaternion(0.0108802, -0.0345283, -0.0124303, 0.999267)
-bones/22/rotation = Quaternion(0.117396, -0.0162832, -0.0345806, 0.992349)
-bones/23/rotation = Quaternion(5.96046e-08, 0, 0, 1)
 bones/24/rotation = Quaternion(-0.128184, 0.0472211, 0.0692018, 0.988206)
 bones/25/rotation = Quaternion(0.0139838, -0.0273227, -0.00670719, 0.999506)
-bones/26/rotation = Quaternion(0.164516, -0.0232741, -0.030879, 0.985616)
 bones/28/rotation = Quaternion(-0.0387072, -0.00595501, -0.00467131, 0.999222)
 bones/29/rotation = Quaternion(-0.0387825, -0.0410553, 0.0223608, 0.998154)
-bones/30/rotation = Quaternion(-0.0148645, -0.0143263, 0.00966106, 0.99974)
-bones/31/rotation = Quaternion(1.49012e-08, 0, 2.98023e-08, 1)
 bones/32/rotation = Quaternion(0.445975, -0.565228, -0.512553, -0.467882)
 bones/33/rotation = Quaternion(0.148001, 0.900956, 0.391215, 0.115431)
 bones/34/rotation = Quaternion(0.14197, 0.631464, -0.019934, 0.762037)
 bones/35/rotation = Quaternion(0.0913339, -0.605074, -0.0488711, 0.789402)
 bones/36/rotation = Quaternion(-0.0343181, -0.101509, 0.0710986, 0.991697)
 bones/37/rotation = Quaternion(-0.0629406, -0.661958, -0.237227, 0.708219)
-bones/38/rotation = Quaternion(-0.0450208, -0.0520331, 0.0775399, 0.994612)
-bones/39/rotation = Quaternion(-2.98023e-08, 2.98023e-08, 0, 1)
 bones/40/rotation = Quaternion(0.136908, -0.0950511, 0.0253052, 0.985688)
 bones/41/rotation = Quaternion(-0.060801, 0.0500774, -0.00882873, 0.996854)
-bones/42/rotation = Quaternion(0.0380153, 0.00717457, 0.0180158, 0.999089)
-bones/43/rotation = Quaternion(0, -1.49012e-08, 0, 1)
 bones/44/rotation = Quaternion(0.0516354, -0.157513, -0.0861122, 0.982399)
 bones/45/rotation = Quaternion(-0.0445644, 0.0360423, 0.00351031, 0.99835)
-bones/46/rotation = Quaternion(0.0387646, 0.0060655, 0.00776362, 0.9992)
-bones/47/rotation = Quaternion(2.98023e-08, -2.98023e-08, 2.98023e-08, 1)
 bones/48/rotation = Quaternion(0.10936, -0.111668, -0.0268429, 0.987345)
 bones/49/rotation = Quaternion(-0.136439, 0.0381968, -0.0259964, 0.98957)
-bones/50/rotation = Quaternion(0.0728789, 0.0119279, 0.0126206, 0.99719)
-bones/51/rotation = Quaternion(0, 0, -5.96046e-08, 1)
-bones/52/rotation = Quaternion(-0.0118701, -0.0715976, -0.069763, 0.99492)
 bones/53/rotation = Quaternion(-0.00273807, 0.0299759, -0.0112749, 0.999483)
-bones/54/rotation = Quaternion(0.0148708, 0.0149774, -0.000569642, 0.999777)
 bones/56/rotation = Quaternion(0.0603995, -0.236349, 0.968656, 0.0468638)
 bones/57/rotation = Quaternion(-0.0438621, 0.928231, 0.361692, -0.0751181)
 bones/58/rotation = Quaternion(-0.00441933, 0.769958, -0.638079, -0.00100594)
@@ -1121,7 +1070,7 @@ bones/64/rotation = Quaternion(0.00312869, 0.999869, -0.0156124, 0.00292876)
 transform = Transform3D(-0.192944, -0.781393, -0.593463, 0.188747, 0.563976, -0.803932, 0.962885, -0.267128, 0.03867, 0.3647, 1.08804, 0.151854)
 
 [node name="FlamingOrbBoneAttachment3D" parent="CinematicPCamManager/CinematicEnemy/Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(-0.557113, -0.411505, 0.72131, 0.151275, 0.803769, 0.575387, -0.816542, 0.429672, -0.38554, -0.23929, 1.32201, -0.456242)
+transform = Transform3D(0.647247, 0.76217, 0.0129831, -0.0231647, 0.0366904, -0.999058, -0.761928, 0.646337, 0.0414032, -0.315524, 1.08721, -0.300903)
 
 [node name="FlamingOrbBoneAttachment3D2" parent="CinematicPCamManager/CinematicEnemy/Armature/GeneralSkeleton" index="3"]
 transform = Transform3D(0.873922, 0.0822303, -0.479061, 0.0335727, 0.973021, 0.228263, 0.484906, -0.215567, 0.847583, -0.0210269, 1.37088, 0.00617729)
@@ -1145,7 +1094,7 @@ transform = Transform3D(0.718802, -0.126219, 0.683661, 0.00409126, -0.982596, -0
 transform = Transform3D(0.335448, -0.388051, 0.858423, 0.201931, -0.860423, -0.467864, 0.920162, 0.330287, -0.210267, 0.18111, 0.443589, 0.170657)
 
 [node name="LeftHandBoneAttachment3D" parent="CinematicPCamManager/CinematicEnemy/Armature/GeneralSkeleton" index="10"]
-transform = Transform3D(-0.557113, -0.411505, 0.72131, 0.151275, 0.803769, 0.575387, -0.816542, 0.429672, -0.38554, -0.23929, 1.32201, -0.456242)
+transform = Transform3D(0.647247, 0.76217, 0.0129831, -0.0231647, 0.0366904, -0.999058, -0.761928, 0.646337, 0.0414032, -0.315524, 1.08721, -0.300903)
 
 [node name="RightHandBoneAttachment3D" parent="CinematicPCamManager/CinematicEnemy/Armature/GeneralSkeleton" index="11"]
 transform = Transform3D(-0.192944, -0.781393, -0.593463, 0.188747, 0.563976, -0.803932, 0.962885, -0.267128, 0.03867, 0.3647, 1.08804, 0.151854)

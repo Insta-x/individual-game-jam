@@ -38,6 +38,8 @@ var attack_charge := 0 :
 		for i in range(charge_particles.size()):
 			if i < attack_charge:
 				charge_particles[i].show()
+			else:
+				charge_particles[i].hide()
 		if attack_charge >= ATTACK_CHARGE_NEEDED:
 			GlobalSignals.player_charged.emit()
 
