@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="individual-game-jam"
-run/main_scene="res://src/room/game_world.tscn"
+run/main_scene="res://src/UI/slideshow.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 

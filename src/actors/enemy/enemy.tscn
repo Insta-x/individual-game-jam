@@ -9081,7 +9081,7 @@ bones/63/rotation = Quaternion(-0.0567722, 0.82885, -0.543886, 0.11821)
 bones/64/rotation = Quaternion(-0.0256346, 0.999538, 0.00923824, 0.013477)
 
 [node name="BoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="1"]
-transform = Transform3D(-0.295973, -0.941084, -0.163591, -0.347585, 0.265632, -0.899235, 0.88971, -0.209287, -0.405727, 0.602885, 1.15173, 0.101855)
+transform = Transform3D(-0.295972, -0.941084, -0.163592, -0.347586, 0.265633, -0.899235, 0.88971, -0.209287, -0.405728, 0.602885, 1.15173, 0.101855)
 bone_name = "RightHand"
 bone_idx = 35
 
@@ -9103,7 +9103,7 @@ process_material = SubResource("ParticleProcessMaterial_xeiy8")
 draw_pass_1 = SubResource("RibbonTrailMesh_hxbb4")
 
 [node name="LeftFootBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="2"]
-transform = Transform3D(-0.938364, -0.345648, -0.000268539, -0.000268497, -4.78216e-05, 1, -0.345648, 0.938364, -4.78216e-05, -0.166763, 0.0899951, -0.514087)
+transform = Transform3D(-0.938364, -0.345648, -0.000268346, -0.000268355, -4.78141e-05, 1, -0.345648, 0.938364, -4.7829e-05, -0.166764, 0.0899948, -0.514087)
 bone_name = "LeftFoot"
 bone_idx = 58
 
@@ -9112,7 +9112,7 @@ layers = 524288
 mesh = SubResource("SphereMesh_m5b46")
 
 [node name="RightFootBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="3"]
-transform = Transform3D(-0.507539, -0.861448, -0.0176372, 0.000378728, -0.0206925, 0.999786, -0.861629, 0.507424, 0.0108285, 0.260583, 0.0459893, 0.369905)
+transform = Transform3D(-0.507538, -0.861448, -0.0176377, 0.00037745, -0.0206924, 0.999786, -0.861629, 0.507423, 0.0108274, 0.260584, 0.0459894, 0.369905)
 bone_name = "RightFoot"
 bone_idx = 63
 
@@ -9121,7 +9121,7 @@ layers = 524288
 mesh = SubResource("SphereMesh_m5b46")
 
 [node name="SpineBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="4"]
-transform = Transform3D(0.65168, 0.239801, -0.71959, -0.0153734, 0.952689, 0.303558, 0.758339, -0.18676, 0.624535, 0.0240163, 1.13096, -0.00718751)
+transform = Transform3D(0.65168, 0.239801, -0.71959, -0.0153735, 0.952689, 0.303558, 0.758339, -0.18676, 0.624534, 0.0240163, 1.13096, -0.00718751)
 bone_name = "Spine"
 bone_idx = 2
 
@@ -9130,7 +9130,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_vxpcl")
 
 [node name="HeadBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="5"]
-transform = Transform3D(0.995793, 0.0909066, 0.0114685, -0.0903158, 0.952722, 0.290109, 0.0154465, -0.289924, 0.956925, 0.122561, 1.74228, -0.159348)
+transform = Transform3D(0.995793, 0.0909068, 0.0114678, -0.0903158, 0.952722, 0.290109, 0.0154472, -0.289924, 0.956925, 0.122561, 1.74228, -0.159348)
 bone_name = "Head"
 bone_idx = 6
 
@@ -9139,7 +9139,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_w7svp")
 
 [node name="LeftLegBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="6"]
-transform = Transform3D(0.925968, -0.00913799, 0.37749, -0.0239654, -0.999114, 0.0346003, 0.376839, -0.0410856, -0.925367, -0.104599, 0.489503, -0.460305)
+transform = Transform3D(0.925969, -0.0091382, 0.37749, -0.0239656, -0.999114, 0.0346002, 0.376839, -0.0410856, -0.925367, -0.104599, 0.489503, -0.460305)
 bone_name = "LeftLowerLeg"
 bone_idx = 57
 
@@ -9148,7 +9148,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_rpdx7")
 
 [node name="RightLegBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="7"]
-transform = Transform3D(0.455839, -0.21755, 0.863065, 0.256578, -0.896388, -0.361465, 0.852278, 0.386214, -0.35279, 0.304663, 0.393891, 0.161511)
+transform = Transform3D(0.455839, -0.21755, 0.863066, 0.256579, -0.896388, -0.361465, 0.852278, 0.386214, -0.35279, 0.304663, 0.393891, 0.161511)
 bone_name = "RightLowerLeg"
 bone_idx = 62
 
@@ -9157,7 +9157,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_rpdx7")
 
 [node name="LeftHandBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="8"]
-transform = Transform3D(0.608114, 0.773034, 0.1806, -0.0485996, 0.263325, -0.963482, -0.792361, 0.57713, 0.197701, -0.210557, 1.07116, -0.505734)
+transform = Transform3D(0.608115, 0.773033, 0.180601, -0.0485988, 0.263325, -0.963482, -0.79236, 0.577131, 0.197701, -0.210557, 1.07116, -0.505735)
 bone_name = "LeftHand"
 bone_idx = 11
 
@@ -9167,7 +9167,7 @@ layers = 524288
 mesh = SubResource("BoxMesh_rpdx7")
 
 [node name="RightHandBoneAttachment3D" type="BoneAttachment3D" parent="Armature/GeneralSkeleton" index="9"]
-transform = Transform3D(-0.295973, -0.941084, -0.163591, -0.347585, 0.265632, -0.899235, 0.88971, -0.209287, -0.405727, 0.602885, 1.15173, 0.101855)
+transform = Transform3D(-0.295972, -0.941084, -0.163592, -0.347586, 0.265633, -0.899235, 0.88971, -0.209287, -0.405728, 0.602885, 1.15173, 0.101855)
 bone_name = "RightHand"
 bone_idx = 35
 
@@ -9187,10 +9187,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="." index="5"]
 root_motion_track = NodePath("%GeneralSkeleton:mixamorig_Root")
 callback_mode_process = 0
-libraries = {
-"": SubResource("AnimationLibrary_xeycu"),
-"player_animations": SubResource("AnimationLibrary_1wvie")
-}
 tree_root = SubResource("AnimationNodeStateMachine_uh2ny")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Attack/blend_position = 0.957166
