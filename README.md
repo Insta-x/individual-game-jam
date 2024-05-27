@@ -11,3 +11,4 @@ Cheat code ini akan membuat attack charge player selalu menyala sehingga player 
 4. Fix player-win cinematic di mana orb api masih terlihat di tangan musuh padahal seharusnya tidak terlihat.
 5. Merapikan kode yang mengatur particle attack charge player agar mengakomodasi cheat baru.
 6. Memperbaiki animasi in general untuk cinematic enemy yang awalnya terkadang ada prop yang muncul hilang tidak sesuai keinginan. Hal ini diperbaiki dengan mengatur animation track terkait visibility menjadi continuous melainkan discrete. Masalah dengan discrete terjadi ketika ada animation blending sehingga bisa saja ada titik visibility yang terlewat di animation tracknya.
+7. Merapikan cinematic animation timing agar lebih sesuai.

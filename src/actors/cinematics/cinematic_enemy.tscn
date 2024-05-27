@@ -3277,7 +3277,7 @@ script = ExtResource("7_d2ip8")
 [node name="ToTransform" type="Node" parent="StateChart/States/Dying" index="0"]
 script = ExtResource("8_deeoo")
 to = NodePath("../../Transform")
-delay_seconds = 21.0
+delay_seconds = 22.5
 
 [node name="Transform" type="Node" parent="StateChart/States" index="4"]
 script = ExtResource("7_d2ip8")
@@ -3285,7 +3285,7 @@ script = ExtResource("7_d2ip8")
 [node name="ToWalking" type="Node" parent="StateChart/States/Transform" index="0"]
 script = ExtResource("8_deeoo")
 to = NodePath("../../Walking")
-delay_seconds = 10.0
+delay_seconds = 8.0
 
 [node name="AnimationPlayer" parent="." index="3"]
 root_motion_track = NodePath("%GeneralSkeleton:mixamorig_Root")
